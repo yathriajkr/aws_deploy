@@ -32,7 +32,7 @@ def get_db():
     return g.db
 
 def get_db_connection():
-    conn = psycopg2.connect(host='192.168.64.12', port='5432', database='test',user='webapp', password='webapp')
+    conn = psycopg2.connect(host='10.10.0.60', port='5432', database='test',user='webapp', password='webapp')
     return conn
 
 def get_data_postgres():
