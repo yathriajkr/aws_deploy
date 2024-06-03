@@ -1,4 +1,4 @@
-import sqlite3
+import psycopg2
 import click
 from flask import current_app, g
 
@@ -30,3 +30,13 @@ def get_db():
         g.db.row_factory = sqlite3.Row
 
     return g.db
+
+def get_db_connection():
+    conn = psycopg2.connect(host='192.168.64.12', port='5432', database='test',user='webapp', password='webapp')
+    return conn
+
+def get_data_postgres():
+    if "db" not in g:
+        g.db = get_db_connection
+    return g.db
+
