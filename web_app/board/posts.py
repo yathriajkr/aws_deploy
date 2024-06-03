@@ -6,7 +6,7 @@ from flask import (
     url_for,
 )
 
-from board.database import get_db
+from board.database import get_db_connection
 
 bp = Blueprint("posts", __name__)
 
@@ -17,20 +17,36 @@ def create():
         message = request.form["message"]
 
         if message:
-            db = get_db()
+            conn = get_db_connection()
+            db = conn.cursor()
             db.execute(
-                "INSERT INTO post (author, message) VALUES (?, ?)",
+                "INSERT INTO posts (author, message) VALUES (%s, %s)",
                 (author, message),
             )
-            db.commit()
+            conn.commit()
+            db.close()
+            conn.close()
             return redirect(url_for("posts.posts"))
         
     return render_template("posts/create.html")
 
 @bp.route("/posts")
 def posts():
-    db = get_db()
-    posts = db.execute(
-        "SELECT author, message, created FROM post ORDER BY created DESC"
-    ).fetchall()
+    conn = get_db_connection()
+    db = conn.cursor()
+    db.execute(
+        "SELECT author, message, created FROM posts ORDER BY created DESC"
+    )
+    posts = db.fetchall()
+    temp=[]
+    for post in posts:
+        temp_dict={}
+        temp_dict['author']=post[0]
+        temp_dict['message']=post[1]
+        temp_dict['created']=post[2]
+        temp.append(temp_dict)
+    posts = temp
+    print(posts)
+    db.close()
+    conn.close()
     return render_template("posts/posts.html", posts=posts)
