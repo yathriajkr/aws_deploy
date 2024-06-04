@@ -30,9 +30,14 @@ def get_db():
         g.db.row_factory = sqlite3.Row
 
     return g.db
+def get_ip():
+    with open("/etc/environment", "r") as my_file:
+        data = my_file.read()
+    return data.split("=")[1]
 
 def get_db_connection():
-    conn = psycopg2.connect(host='10.10.0.92', port='5432', database='messagedatabase',user='webapp', password='webapp')
+    host_ip = get_ip()
+    conn = psycopg2.connect(host=host_ip, port='5432', database='messagedatabase',user='webapp', password='webapp')
     return conn
 
 def get_data_postgres():
