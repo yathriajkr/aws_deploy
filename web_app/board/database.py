@@ -33,7 +33,7 @@ def get_db():
 def get_ip():
     with open("/etc/environment", "r") as my_file:
         data = my_file.read()
-    return data.split("=")[1]
+    return data.split("=")[1].rstrip("\n")
 
 def get_db_connection():
     host_ip = get_ip()
