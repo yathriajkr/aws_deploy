@@ -34,3 +34,13 @@
       until: result is not failed and (result.stdout | from_json).response.result == 'yes'
       retries: 50
       delay: 30
+
+    - name: Get the system info
+      paloaltonetworks.panos.panos_op:
+        provider: "{{ provider }}"
+        cmd: "show system info"
+      register: res
+
+    - debug:
+        msg: "{{ res.stdout }}"
+        
