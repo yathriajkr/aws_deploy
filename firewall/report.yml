@@ -39,6 +39,12 @@
       paloaltonetworks.panos.panos_facts:
         provider: '{{ provider }}'
         gather_subset: ['all']
+      register: complete_facts
+
+    - name: Print Facts
+      debug:
+        msg: "{{ complete_facts }}"
+            
     
     - name: Get the system info
       paloaltonetworks.panos.panos_op:
