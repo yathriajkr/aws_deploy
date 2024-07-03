@@ -41,10 +41,10 @@
         cmd: "show system info"
       register: res
 
-    - name: Get the system info
+    - name: Get the system CPU info
       paloaltonetworks.panos.panos_op:
         provider: "{{ provider }}"
-        cmd: "show routing route"
+        cmd: "show system resources"
       register: res
 
     - debug:
