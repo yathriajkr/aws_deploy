@@ -41,6 +41,12 @@
         cmd: "show system info"
       register: res
 
+    - name: Get the system info
+      paloaltonetworks.panos.panos_op:
+        provider: "{{ provider }}"
+        cmd: "show routing route"
+      register: res
+
     - debug:
         msg: "{{ res.stdout }}"
         
