@@ -73,41 +73,26 @@
       debug:
         msg: "{{ object_result }}"
         
-    # - name: Print Facts
-    #   debug:
-    #     msg: "{{ complete_facts }}"
-            
-    
-    # - name: Get the system info
-    #   paloaltonetworks.panos.panos_op:
-    #     provider: "{{ provider }}"
-    #     cmd: "show system info"
-    #   register: res
-
-    # - name: Get the system CPU info
-    #   paloaltonetworks.panos.panos_op:
-    #     provider: "{{ provider }}"
-    #     cmd: "show system resources"
-    #   register: res
-
-
-    - name: Filter the value for Zones
-      set_fact: 
-        device_zone_config: "{{ device_data | ftr_zone }}"
+#Remove from here 
+    # - name: Filter the value for Zones
+    #   set_fact: 
+    #     device_zone_config: "{{ device_data | ftr_zone }}"
         
-    - name: validate the device zones data against standards
-      set_fact:
-        missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
+    # - name: validate the device zones data against standards
+    #   set_fact:
+    #     missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
 
-    - name: Create Zones as per standards
-      paloaltonetworks.panos.panos_zone:
-        provider: "{{ provider }}"
-        zone: "{{ zone_item.zone_name }}"
-        mode: "{{ zone_item.mode }}"
-      loop: "{{ missing_zone }}"
-      loop_control:
-        loop_var: zone_item
-        
+    # - name: Create Zones as per standards
+    #   paloaltonetworks.panos.panos_zone:
+    #     provider: "{{ provider }}"
+    #     zone: "{{ zone_item.zone_name }}"
+    #     mode: "{{ zone_item.mode }}"
+    #   loop: "{{ missing_zone }}"
+    #   loop_control:
+    #     loop_var: zone_item
+
+  #Remove till here 
+  
     # - name: Create Routes
     #   paloaltonetworks.panos.panos_static_route:
     #     provider: '{{ provider }}'
