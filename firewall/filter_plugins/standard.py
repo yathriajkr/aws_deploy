@@ -21,9 +21,14 @@ def validate_zone(std_config, device_config):
   print(missing_zones)
   return missing_zones
 
+def xml2json(value):
+    import xmltodict, json
+    return json.dumps(xmltodict.parse(value))
+
 class FilterModule(object):
     def filters(self):
         return {
             'ftr_zone': ftr_zone,
             'validate_zone': validate_zone
+            'xml2json': xml2json
         }
