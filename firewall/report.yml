@@ -62,7 +62,7 @@
     #     msg: "{{ res.stdout }}"
         
     - name: "Testing"
-      setfact:
+      set_fact:
         data: "{{ inventory_hostname | validate() }}"
 
     - name: 
