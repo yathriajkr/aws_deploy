@@ -25,41 +25,41 @@
   connection: local
 
   tasks:
-    - name: Check to see if device is ready
-      paloaltonetworks.panos.panos_op:
-        provider: '{{ provider }}'
-        cmd: 'show chassis-ready'
-      changed_when: false
-      register: result
-      until: result is not failed and (result.stdout | from_json).response.result == 'yes'
-      retries: 50
-      delay: 30
+    # - name: Check to see if device is ready
+    #   paloaltonetworks.panos.panos_op:
+    #     provider: '{{ provider }}'
+    #     cmd: 'show chassis-ready'
+    #   changed_when: false
+    #   register: result
+    #   until: result is not failed and (result.stdout | from_json).response.result == 'yes'
+    #   retries: 50
+    #   delay: 30
 
-    - name: Get facts
-      paloaltonetworks.panos.panos_facts:
-        provider: '{{ provider }}'
-        gather_subset: ['all']
-      register: complete_facts
+    # - name: Get facts
+    #   paloaltonetworks.panos.panos_facts:
+    #     provider: '{{ provider }}'
+    #     gather_subset: ['all']
+    #   register: complete_facts
 
-    - name: Print Facts
-      debug:
-        msg: "{{ complete_facts }}"
+    # - name: Print Facts
+    #   debug:
+    #     msg: "{{ complete_facts }}"
             
     
-    - name: Get the system info
-      paloaltonetworks.panos.panos_op:
-        provider: "{{ provider }}"
-        cmd: "show system info"
-      register: res
+    # - name: Get the system info
+    #   paloaltonetworks.panos.panos_op:
+    #     provider: "{{ provider }}"
+    #     cmd: "show system info"
+    #   register: res
 
-    - name: Get the system CPU info
-      paloaltonetworks.panos.panos_op:
-        provider: "{{ provider }}"
-        cmd: "show system resources"
-      register: res
+    # - name: Get the system CPU info
+    #   paloaltonetworks.panos.panos_op:
+    #     provider: "{{ provider }}"
+    #     cmd: "show system resources"
+    #   register: res
 
-    - debug:
-        msg: "{{ res.stdout }}"
+    # - debug:
+    #     msg: "{{ res.stdout }}"
         
     - name: "Testing"
       setfact:
