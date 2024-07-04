@@ -28,7 +28,7 @@ def xml2json(value):
 class FilterModule(object):
     def filters(self):
         return {
+            'xml2json': xml2json,
             'ftr_zone': ftr_zone,
             'validate_zone': validate_zone
-            'xml2json': xml2json
         }
