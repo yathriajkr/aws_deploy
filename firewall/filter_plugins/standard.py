@@ -1,4 +1,5 @@
 def fetch_static_info(device_data):
+  print(device_data)
   for data in device_data:
 
   return trim_data
