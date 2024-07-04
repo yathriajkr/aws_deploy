@@ -26,9 +26,10 @@
         gather_subset: ['config']
       register: device_data_config
 
-    - name: Get all virtual routers
-      panos_virtual_router_facts:
+    - name: Create Virtual Router
+      paloaltonetworks.panos.panos_virtual_router:
         provider: '{{ provider }}'
+        state: gathered
       register: vrlist
 
     - name: Print data
