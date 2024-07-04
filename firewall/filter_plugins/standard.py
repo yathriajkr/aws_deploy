@@ -7,7 +7,7 @@ def ftr_static_route(device_data):
 def validate_static(std_config, device_config):
   print("Hello")
   
-  miss_routes = "Hello "+ hostname
+  miss_routes = "Hello "
   return miss_routes
 
 
