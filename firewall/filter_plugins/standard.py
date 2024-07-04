@@ -1,5 +1,5 @@
 
-def validate(hostname):
+def validate(std_config, device_config):
   print("Hello")
   some = "Hello "+ hostname
   return some
