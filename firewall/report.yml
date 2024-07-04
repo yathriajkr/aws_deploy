@@ -28,6 +28,15 @@
     - name: Print data
       debug:
         msg: "{{ vrlist }}"
+
+    - name: Retrieve address group object 'Prod'
+      paloaltonetworks.panos.panos_object_facts:
+        provider: '{{ provider }}'
+      register: object_result
+
+    - name: Print data
+      debug:
+        msg: "{{ object_result }}"
     # - name: Print Facts
     #   debug:
     #     msg: "{{ complete_facts }}"
