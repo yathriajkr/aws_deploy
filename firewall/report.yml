@@ -60,7 +60,15 @@
 
     - debug:
         msg: "{{ res.stdout }}"
+        
+    - name: "Testing"
+      setfact:
+        data: "{{ inventory_hostname | validate() }}"
 
+    - name: 
+      debug:
+        msg: "{{ data }}" 
+        
     - name: 
     # - name: Create Address objects
     #   paloaltonetworks.panos.panos_address_object:
