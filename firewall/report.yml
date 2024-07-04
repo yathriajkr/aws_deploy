@@ -60,10 +60,14 @@
 
     # - debug:
     #     msg: "{{ res.stdout }}"
+
+    - name: Filter the value
+      set_fact: 
+        device_static_route_config: "{{ standard_static_route_config | filter_static(device_static_route_config) }}"
         
-    - name: "Testing"
+    - name: validate the static route data against standards
       set_fact:
-        data: "{{ inventory_hostname | validate() }}"
+        missing_routes: "{{ standard_static_route_config | validate_static(device_static_route_config) }}"
 
     - name: 
       debug:
