@@ -1,5 +1,6 @@
 def ftr_static_route(device_data):
   print(device_data)
+  print(device_data["ansible_facts"]["ansible_net_virtual-systems"][0]["vsys_iflist"])
   #for data in device_data:
 
   return device_data
