@@ -1,7 +1,7 @@
 
-def validate():
+def validate(hostname):
   print("Hello")
-  some = "Hello"
+  some = "Hello "+ hostname
   return some
 
 
