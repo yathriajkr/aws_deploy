@@ -20,7 +20,7 @@
         gather_subset: ['all']
       register: device_data
 
-     - name: Get facts
+    - name: Get facts
       paloaltonetworks.panos.panos_facts:
         provider: '{{ provider }}'
         gather_subset: ['config']
