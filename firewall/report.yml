@@ -20,6 +20,14 @@
         gather_subset: ['all']
       register: device_data
 
+    - name: Get all virtual routers
+      panos_virtual_router_facts:
+        provider: '{{ provider }}'
+      register: vrlist
+
+    - name: Print data
+      debug:
+        msg: "{{ vrlist }}"
     # - name: Print Facts
     #   debug:
     #     msg: "{{ complete_facts }}"
