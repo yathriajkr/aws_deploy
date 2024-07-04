@@ -17,3 +17,21 @@ standard_interfaces:
   management_profile: Deny-all
   mode: 'layer3'
   commit: no
+
+standard_address_object:
+- name: web-object
+  value: 10.5.2.5
+- name: Database-objest
+  value: 10.100.10.10
+
+Standard_service_object:
+- name: service-tcp-22
+  destination_port: 22
+- name: service-tcp-221
+  destination_port: 221
+- name: service-tcp-222
+  destination_port: 222
+- name: service-http-80
+  destination_port: 80
+- name: service-https-443
+  destination_port: 443
