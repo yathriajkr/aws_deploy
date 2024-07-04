@@ -15,6 +15,6 @@ class FilterModule(object):
     def filters(self):
         return {
             'validate_static': validate,
-            'filter_static': fetch_static_info
+            'ftr_static': fetch_static_info
         }
 
