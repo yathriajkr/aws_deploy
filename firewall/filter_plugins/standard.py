@@ -1,6 +1,6 @@
 def ftr_zone(device_data):
   print(device_data)
-  zones = device_data["ansible_facts"]["ansible_net_virtual-systems"][0]["vsys_iflist"]
+  zones = device_data["ansible_facts"]["ansible_net_virtual-systems"][0]["vsys_zonelist"]
   #for data in device_data:
   return zones
 
