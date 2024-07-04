@@ -14,5 +14,6 @@ def validate_static(std_config, device_config):
 class FilterModule(object):
     def filters(self):
         return {
-            'validate_static': validate_static,
-            'ftr_static': ftr_static
+            'ftr_static': ftr_static,
+            'validate_static': validate_static
+        }
