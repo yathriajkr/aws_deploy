@@ -1,4 +1,4 @@
-def ftr_static(device_data):
+def ftr_static(device_data, hostname):
   print(device_data)
   for data in device_data:
 
@@ -16,5 +16,3 @@ class FilterModule(object):
         return {
             'validate_static': validate_static,
             'ftr_static': ftr_static
-        }
-
