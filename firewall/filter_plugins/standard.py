@@ -2,7 +2,7 @@ def ftr_zone(device_data):
   print(device_data)
   # zones = device_data["ansible_facts"]["ansible_net_virtual-systems"][0]["vsys_zonelist"])
   #for data in device_data:
-  zones = ['hello]
+  zones = ['hello']
   return zones
 
 def validate_zone(std_config, device_config):
