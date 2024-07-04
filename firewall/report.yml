@@ -20,6 +20,12 @@
         gather_subset: ['all']
       register: device_data
 
+     - name: Get facts
+      paloaltonetworks.panos.panos_facts:
+        provider: '{{ provider }}'
+        gather_subset: ['config']
+      register: device_data_config
+
     - name: Get all virtual routers
       panos_virtual_router_facts:
         provider: '{{ provider }}'
@@ -37,6 +43,10 @@
     - name: Print data
       debug:
         msg: "{{ object_result }}"
+
+    - name: Print data
+      debug:
+        msg: "{{ device_data_config }}"
     # - name: Print Facts
     #   debug:
     #     msg: "{{ complete_facts }}"
