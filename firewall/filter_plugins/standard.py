@@ -1,6 +1,8 @@
 
 def validate():
-  return something
+  print("Hello")
+  some = "Hello"
+  return some
 
 
 class FilterModule(object):
