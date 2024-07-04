@@ -1,15 +1,19 @@
 
-panos_static_standard_route:
-- name: outbound
-  destination: '0.0.0.0/0'
-  nexthop: '10.5.1.1'
-  interface: 'ethernet1/1'
-- name: to-web
-  destination: '10.5.2.0/24'
-  nexthop: '10.5.2.1'
-  interface: 'ethernet1/2'
-- name: to-database
-  destination: '10.5.3.0/24'
-  nexthop: '10.5.2.1'
-  interface: 'ethernet1/2'
-  
+Standard_interfaces:
+- if_name: ethernet1/1
+  zone_name: Untrust
+  create_default_route: yes
+  mode: 'layer3'
+  commit: no
+- if_name: ethernet1/2
+  zone_name: Web
+  create_default_route: no
+  management_profile: Allow-HTTPS
+  mode: 'layer3'
+  commit: no
+- if_name: ethernet1/3
+  zone_name: DMZ
+  create_default_route: no
+  management_profile: Deny-all
+  mode: 'layer3'
+  commit: no
