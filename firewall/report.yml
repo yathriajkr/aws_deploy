@@ -91,19 +91,15 @@
     #   register: res
 
 
-    - name: Filter the value
+    - name: Filter the value for Zones
       set_fact: 
         device_zone_config: "{{ device_data | ftr_zone }}"
         
-    - name: validate the static route data against standards
+    - name: validate the device zones data against standards
       set_fact:
         missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
 
-    - name: print
-      debug:
-        msg: "{{ missing_zone }}"
-
-    - name: Create Zones
+    - name: Create Zones as per standards
       paloaltonetworks.panos.panos_zone:
         provider: "{{ provider }}"
         zone: "{{ zone_item.zone_name }}"
