@@ -61,15 +61,15 @@
 
     - name: Filter the value
       set_fact: 
-        device_static_route_config: "{{ device_data | ftr_static }}"
+        device_zone_config: "{{ device_data | ftr_zone }}"
         
     - name: validate the static route data against standards
       set_fact:
-        missing_routes: "{{ standard_static_route_config | validate_static(device_static_route_config) }}"
+        missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
 
     - name: print
       debug:
-        msg: "{{ missing_routes }}"
+        msg: "{{ missing_zone}}"
     # - name: Create Routes
     #   paloaltonetworks.panos.panos_static_route:
     #     provider: '{{ provider }}'
