@@ -11,7 +11,7 @@ def validate_zone(std_config, device_config):
   for zone in std_config:
     print(zone)
     temp = {}
-    if zone.zone_name not in device_config:
+    if zone["zone_name"] not in device_config:
       temp = zone
     missing_zones.append(temp)
     
