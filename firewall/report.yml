@@ -26,6 +26,10 @@
         gather_subset: ['config']
       register: device_data_config
 
+    - name: Print device config data
+      debug:
+        msg: "{{ device_data_config }}"
+        
     - name: Create Virtual Router
       paloaltonetworks.panos.panos_virtual_router:
         provider: '{{ provider }}'
@@ -46,9 +50,28 @@
       debug:
         msg: "{{ object_result }}"
 
-    - name: Print device config data
+    - name: Retrieve address group object all
+      paloaltonetworks.panos.panos_object_facts:
+        provider: '{{ provider }}'
+        name_regex: '.*.*'
+        object_type: 'service'
+      register: object_result
+
+    - name: Print service only object data
       debug:
-        msg: "{{ device_data_config }}"
+        msg: "{{ object_result }}"
+        
+    - name: Retrieve address group object all
+      paloaltonetworks.panos.panos_object_facts:
+        provider: '{{ provider }}'
+        name_regex: '.*.*'
+        object_type: 'service-group'
+      register: object_result
+
+    - name: Print service group object data
+      debug:
+        msg: "{{ object_result }}"
+        
     # - name: Print Facts
     #   debug:
     #     msg: "{{ complete_facts }}"
