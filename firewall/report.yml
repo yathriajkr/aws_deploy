@@ -35,11 +35,11 @@
     #   retries: 50
     #   delay: 30
 
-    # - name: Get facts
-    #   paloaltonetworks.panos.panos_facts:
-    #     provider: '{{ provider }}'
-    #     gather_subset: ['all']
-    #   register: complete_facts
+    - name: Get facts
+      paloaltonetworks.panos.panos_facts:
+        provider: '{{ provider }}'
+        gather_subset: ['all']
+      register: device_data
 
     # - name: Print Facts
     #   debug:
@@ -58,20 +58,14 @@
     #     cmd: "show system resources"
     #   register: res
 
-    # - debug:
-    #     msg: "{{ res.stdout }}"
 
     - name: Filter the value
       set_fact: 
-        device_static_route_config: "{{ standard_static_route_config | filter_static(device_static_route_config) }}"
+        device_static_route_config: "{{ device_data | filter_static() }}"
         
     - name: validate the static route data against standards
       set_fact:
         missing_routes: "{{ standard_static_route_config | validate_static(device_static_route_config) }}"
-
-    - name: 
-      debug:
-        msg: "{{ data }}" 
         
     # - name: 
     # - name: Create Address objects
