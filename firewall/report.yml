@@ -107,14 +107,14 @@
       debug:
         msg: "{{ missing_zone }}"
 
-    # - name: Create Zones
-    #   paloaltonetworks.panos.panos_zone:
-    #     provider: "{{ provider }}"
-    #     zone: "{{ zone_item.zone_name }}"
-    #     mode: "{{ zone_item.mode }}"
-    #   loop: "{{ missing_zone }}"
-    #   loop_control:
-    #     loop_var: zone_item
+    - name: Create Zones
+      paloaltonetworks.panos.panos_zone:
+        provider: "{{ provider }}"
+        zone: "{{ zone_item.zone_name }}"
+        mode: "{{ zone_item.mode }}"
+      loop: "{{ missing_zone }}"
+      loop_control:
+        loop_var: zone_item
         
     # - name: Create Routes
     #   paloaltonetworks.panos.panos_static_route:
