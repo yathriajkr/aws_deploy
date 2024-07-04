@@ -9,6 +9,7 @@ def validate_zone(std_config, device_config):
   missing_zones = []
   temp = {}
   for zone in std_config:
+    print(zone)
     temp = {}
     if zone.zone_name not in device_config:
       temp = zone
