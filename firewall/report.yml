@@ -66,7 +66,18 @@
     - name: validate the static route data against standards
       set_fact:
         missing_routes: "{{ standard_static_route_config | validate_static(device_static_route_config) }}"
-        
+
+    - name: Create Routes
+      paloaltonetworks.panos.panos_static_route:
+        provider: '{{ provider }}'
+        name: '{{ route_item.name }}'
+        destination: '{{ route_item.destination }}'
+        nexthop: '{{ route_item.nexthop }}'
+        interface: '{{ route_item.interface }}'
+      loop: '{{ missing_routes }}'
+      loop_control:
+        loop_var: route_item
+  
     # - name: 
     # - name: Create Address objects
     #   paloaltonetworks.panos.panos_address_object:
