@@ -1,5 +1,5 @@
 
-Standard_interfaces:
+standard_interfaces:
 - if_name: ethernet1/1
   zone_name: Untrust
   create_default_route: yes
