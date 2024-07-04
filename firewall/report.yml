@@ -6,9 +6,7 @@
     - standard_config.yml    
 
   tasks:
-    - name: print the vars
-      debug: 
-        msg: "{{ standard_interfaces }}"
+  
     # - name: Check to see if device is ready
     #   paloaltonetworks.panos.panos_op:
     #     provider: '{{ provider }}'
@@ -24,16 +22,6 @@
         provider: '{{ provider }}'
         gather_subset: ['all']
       register: device_data
-
-    - name: Get config facts
-      paloaltonetworks.panos.panos_facts:
-        provider: '{{ provider }}'
-        gather_subset: ['config']
-      register: device_data_config
-
-    - name: Print device config data
-      debug:
-        msg: "{{ device_data_config }}"
         
     - name: Create Virtual Router
       paloaltonetworks.panos.panos_virtual_router:
@@ -44,6 +32,14 @@
     - name: Print virtual router data
       debug:
         msg: "{{ vrlist }}"
+        
+    - name: Parse the output
+      set_fact:
+       content_json: "{{ vrlist['gathered_xml'] | xml2json }}"
+
+    - name: Print the static routes
+      debug:
+        msg: "{{ content_json }}"
 
     - name: Retrieve address group object all
       paloaltonetworks.panos.panos_object_facts:
