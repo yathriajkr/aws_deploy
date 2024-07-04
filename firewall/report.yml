@@ -14,13 +14,13 @@
     #   retries: 50
     #   delay: 30
 
-    - name: Get facts
+    - name: Get  all facts
       paloaltonetworks.panos.panos_facts:
         provider: '{{ provider }}'
         gather_subset: ['all']
       register: device_data
 
-    - name: Get facts
+    - name: Get config facts
       paloaltonetworks.panos.panos_facts:
         provider: '{{ provider }}'
         gather_subset: ['config']
@@ -32,7 +32,7 @@
         state: gathered
       register: vrlist
 
-    - name: Print data
+    - name: Print virtual router data
       debug:
         msg: "{{ vrlist }}"
 
@@ -42,11 +42,11 @@
         name_regex: '.*.*'
       register: object_result
 
-    - name: Print data
+    - name: Print object data
       debug:
         msg: "{{ object_result }}"
 
-    - name: Print data
+    - name: Print device config data
       debug:
         msg: "{{ device_data_config }}"
     # - name: Print Facts
