@@ -8,7 +8,7 @@ panos_static_standard_route:
   destination: '10.5.2.0/24'
   nexthop: '10.5.2.1'
   interface: 'ethernet1/2'
-- name: to-web
+- name: to-database
   destination: '10.5.3.0/24'
   nexthop: '10.5.2.1'
   interface: 'ethernet1/2'
