@@ -61,7 +61,7 @@
 
     - name: Filter the value
       set_fact: 
-        device_static_route_config: "{{ device_data | filter_static() }}"
+        device_static_route_config: "{{ device_data | filter_static }}"
         
     - name: validate the static route data against standards
       set_fact:
