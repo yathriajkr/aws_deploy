@@ -2,8 +2,13 @@
 - name: Check for complaince and configure Standard configs
   hosts: pa-fw
   connection: local
+  vars_files:
+    - standard_config.yml    
 
   tasks:
+    - name: print the vars
+      debug: 
+        msg: "{{ standard_interfaces }}"
     # - name: Check to see if device is ready
     #   paloaltonetworks.panos.panos_op:
     #     provider: '{{ provider }}'
