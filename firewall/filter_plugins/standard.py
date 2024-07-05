@@ -7,16 +7,16 @@ def validate_servobj(std_config, device_config):
   missing_serv_name = []
   for dev_data in device_config:
     missing_serv_name.append(dev_data['name'])
-  print(missing_serv_name)
+  # print(missing_serv_name)
   for servobj in std_config:
     # print("Enter obj")
-    print(servobj)
+    # print(servobj)
     temp = {}
     if servobj["name"] not in missing_serv_name:
       # print("found match")
       temp = servobj
       missing_servobj.append(temp)
-  print(missing_servobj)
+  # print(missing_servobj)
   
   return missing_servobj
 
@@ -26,18 +26,18 @@ def ftr_addrobj(addr_data):
   return addrobj
 
 def validate_addrobj(std_config, device_config):
-  print(device_config)
+  # print(device_config)
   missing_addrobj = []
   temp = {}
   for addrobj in std_config:
     # print("Enter obj")
-    print(addrobj)
+    # print(addrobj)
     temp = {}
     if addrobj["name"] not in device_config:
       # print("found match")
       temp = addrobj
       missing_addrobj.append(temp)
-  print(missing_addrobj)
+  # print(missing_addrobj)
   return missing_addrobj
 
 
@@ -53,7 +53,7 @@ def validate_zone(std_config, device_config):
   temp = {}
   for zone in std_config:
     # print("Enter zone")
-    print(zone)
+    # print(zone)
     temp = {}
     if zone["zone_name"] not in device_config:
       # print("found match")
