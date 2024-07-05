@@ -5,17 +5,21 @@ def ftr_servobj(serv_data):
 def validate_servobj(std_config, device_config):
   print(device_config)
   missing_servobj = []
-  temp = {}
+  missing_serv_name = []
+  for dev_data in device_config:
+    missing_serv_name.append(dev_data['name'])
+  printmissing_serv_name
   for servobj in std_config:
     # print("Enter obj")
     print(servobj)
     for dev_servobj in device_config:
       temp = {}
-      if servobj["name"] != dev_servobj['name'] and servobj["destination_port"] != dev_servobj['destination_port']:
+      if servobj["name"] not in missing_serv_name:
         # print("found match")
         temp = servobj
         missing_servobj.append(temp)
   print(missing_servobj)
+  
   return missing_servobj
 
 
