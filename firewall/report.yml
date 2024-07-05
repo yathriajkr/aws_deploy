@@ -41,28 +41,7 @@
       debug:
         msg: "{{ content_json }}"
 
-    - name: Retrieve all address group object
-      paloaltonetworks.panos.panos_object_facts:
-        provider: '{{ provider }}'
-        name_regex: '.*.*'
-      register: object_result
-
-    - name: Print address group object data
-      debug:
-        msg: "{{ object_result }}"
-
-    - name: Retrieve all service object
-      paloaltonetworks.panos.panos_object_facts:
-        provider: '{{ provider }}'
-        name_regex: '.*.*'
-        object_type: 'service'
-      register: object_result
-
-    - name: Print service object data
-      debug:
-        msg: "{{ object_result }}"
-        
-#Remove from here 
+    #Remove from here 
     # - name: Filter the value for Zones
     #   set_fact: 
     #     device_zone_config: "{{ device_data | ftr_zone }}"
@@ -81,6 +60,37 @@
     #     loop_var: zone_item
 
   #Remove till here 
+  
+    - name: Retrieve all address group object
+      paloaltonetworks.panos.panos_object_facts:
+        provider: '{{ provider }}'
+        name_regex: '.*.*'
+      register: object_result
+
+    - name: Print address group object data
+      debug:
+        msg: "{{ object_result }}"
+
+    - name: Filter the values for the address objects
+      set_fact:
+        device_addobj_config: "{{ object_result | ftr_zone }}"
+
+    - name: Validate the device addobj data against standards
+      set_fact:
+        missing_addrobj: "{{ standard_interfaces | validate_zone(device_addobj_config) }}"
+
+    - name: Retrieve all service object
+      paloaltonetworks.panos.panos_object_facts:
+        provider: '{{ provider }}'
+        name_regex: '.*.*'
+        object_type: 'service'
+      register: object_result
+
+    - name: Print service object data
+      debug:
+        msg: "{{ object_result }}"
+        
+
   
     # - name: Create Routes
     #   paloaltonetworks.panos.panos_static_route:
