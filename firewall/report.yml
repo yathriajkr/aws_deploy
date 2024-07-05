@@ -79,25 +79,25 @@
       set_fact:
         missing_addrobj: "{{ standard_address_object | validate_zone(device_addobj_config) }}"
 
-    - name: Create Address objects
-      paloaltonetworks.panos.panos_address_object:
-        provider: '{{ provider }}'
-        name: '{{ address_item.name }}'
-        value: '{{ address_item.value }}'
-      loop: '{{ missing_addrobj }}'
-      loop_control:
-        loop_var: address_item
+    # - name: Create Address objects
+    #   paloaltonetworks.panos.panos_address_object:
+    #     provider: '{{ provider }}'
+    #     name: '{{ address_item.name }}'
+    #     value: '{{ address_item.value }}'
+    #   loop: '{{ missing_addrobj }}'
+    #   loop_control:
+    #     loop_var: address_item
 
-    - name: Retrieve all service object
-      paloaltonetworks.panos.panos_object_facts:
-        provider: '{{ provider }}'
-        name_regex: '.*.*'
-        object_type: 'service'
-      register: object_result
+    # - name: Retrieve all service object
+    #   paloaltonetworks.panos.panos_object_facts:
+    #     provider: '{{ provider }}'
+    #     name_regex: '.*.*'
+    #     object_type: 'service'
+    #   register: object_result
 
-    - name: Print service object data
-      debug:
-        msg: "{{ object_result }}"
+    # - name: Print service object data
+    #   debug:
+    #     msg: "{{ object_result }}"
         
 
   
@@ -111,14 +111,3 @@
     #   loop: '{{ missing_routes }}'
     #   loop_control:
     #     loop_var: route_item
-  
-    # - name: 
-    # - name: Create Address objects
-    #   paloaltonetworks.panos.panos_address_object:
-    #     provider: '{{ provider }}'
-    #     name: '{{ address_item.name }}'
-    #     value: '{{ address_item.value }}'
-    #   loop: '{{ panos_address_object }}'
-    #   loop_control:
-    #     loop_var: address_item
-    #   register: 
