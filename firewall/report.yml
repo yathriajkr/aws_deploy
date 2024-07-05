@@ -73,11 +73,11 @@
 
     - name: Filter the values for the address objects
       set_fact:
-        device_addobj_config: "{{ addr_object_result | ftr_ }}"
+        device_addrobj_config: "{{ addr_object_result | ftr_addrobj }}"
 
     - name: Validate the device addobj data against standards
       set_fact:
-        missing_addrobj: "{{ standard_address_object | validate_zone(device_addobj_config) }}"
+        missing_addrobj: "{{ standard_address_object | validate_addrobj(device_addrobj_config) }}"
 
     # - name: Create Address objects
     #   paloaltonetworks.panos.panos_address_object:
@@ -93,12 +93,19 @@
         provider: '{{ provider }}'
         name_regex: '.*.*'
         object_type: 'service'
-      register: object_result
+      register: serv_object_result
 
     - name: Print service object data
       debug:
-        msg: "{{ object_result }}"
+        msg: "{{ serv_object_result }}"
 
+    - name: Filter the values for the address objects
+      set_fact:
+        device_servobj_config: "{{ serv_object_result | ftr_servobj }}"
+
+    - name: Validate the device addobj data against standards
+      set_fact:
+        missing_addrobj: "{{ standard_address_object | validate_servobj(device_servobj_config) }}"
     
 
   
