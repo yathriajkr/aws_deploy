@@ -31,7 +31,5 @@ standard_service_object:
   destination_port: 221
 - name: service-tcp-222
   destination_port: 222
-- name: service-http-80
-  destination_port: 80
-- name: service-https-443
-  destination_port: 443
+- name: service-tcp-3036
+  destination_port: 3036
