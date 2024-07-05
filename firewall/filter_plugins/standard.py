@@ -1,3 +1,24 @@
+def ftr_servobj(serv_data):
+  servobj =  serv_data['objects']
+  return servobj
+
+def validate_servobj(std_config, device_config)
+  print(device_config
+  missing_addrobj = []
+  temp = {}
+  for servobj in std_config:
+    # print("Enter obj")
+    print(servobj)
+    for dev_servobj in device_config:
+      temp = {}
+      if servobj["name"] == dev_servobj['name'] and servobj["destination_port"] == dev_servobj['destination_port']:
+        # print("found match")
+        temp = servobj
+        missing_servobj.append(temp)
+  print(missing_servobj)
+  return missing_servobj
+
+
 def ftr_addrobj(addr_data):
   addrobj =  addr_data['objects'][0]
   return addrobj
@@ -51,5 +72,7 @@ class FilterModule(object):
             'ftr_zone': ftr_zone,
             'validate_zone': validate_zone,
             'ftr_addrobj': ftr_addrobj,
-            'validate_addrobj': validate_addrobj
+            'validate_addrobj': validate_addrobj,
+            'ftr_servobj': ftr_servobj,
+            'validate_servobj': validate_servobj
         }
