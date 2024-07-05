@@ -3,10 +3,11 @@ def ftr_addrobj(addr_data):
   return addrobj
 
 def validate_addrobj(std_config, device_config)
+  print(device_config
   missing_addrobj = []
   temp = {}
   for addrobj in std_config:
-    # print("Enter zone")
+    # print("Enter obj")
     print(addrobj)
     temp = {}
     if addrobj["name"] not in device_config:
@@ -16,7 +17,6 @@ def validate_addrobj(std_config, device_config)
   return missing_addrobj
 
 
-  
 def ftr_zone(device_data):
   # print(device_data)
   zones = device_data["ansible_facts"]["ansible_net_virtual-systems"][0]["vsys_zonelist"]
@@ -48,5 +48,7 @@ class FilterModule(object):
         return {
             'xml2json': xml2json,
             'ftr_zone': ftr_zone,
-            'validate_zone': validate_zone
+            'validate_zone': validate_zone,
+            'ftr_addrobj': ftr_addrobj,
+            'validate_addrobj': validate_addrobj
         }
