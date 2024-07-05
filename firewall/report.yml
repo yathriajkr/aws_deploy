@@ -105,7 +105,7 @@
 
     - name: Validate the device addobj data against standards
       set_fact:
-        missing_addrobj: "{{ standard_address_object | validate_servobj(device_servobj_config) }}"
+        missing_addrobj: "{{ standard_service_object | validate_servobj(device_servobj_config) }}"
     
 
   
