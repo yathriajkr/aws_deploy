@@ -67,9 +67,9 @@
         name_regex: '.*.*'
       register: addr_object_result
 
-    - name: Print address group object data
-      debug:
-        msg: "{{ addr_object_result }}"
+    # - name: Print address group object data
+    #   debug:
+    #     msg: "{{ addr_object_result }}"
 
     - name: Filter the values for the address objects
       set_fact:
@@ -95,9 +95,9 @@
         object_type: 'service'
       register: serv_object_result
 
-    - name: Print service object data
-      debug:
-        msg: "{{ serv_object_result }}"
+    # - name: Print service object data
+    #   debug:
+    #     msg: "{{ serv_object_result }}"
 
     - name: Filter the values for the service objects
       set_fact:
