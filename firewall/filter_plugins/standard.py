@@ -11,7 +11,7 @@ def validate_servobj(std_config, device_config):
     print(servobj)
     for dev_servobj in device_config:
       temp = {}
-      if servobj["name"] == dev_servobj['name'] and servobj["destination_port"] == dev_servobj['destination_port']:
+      if servobj["name"] != dev_servobj['name'] and servobj["destination_port"] != dev_servobj['destination_port']:
         # print("found match")
         temp = servobj
         missing_servobj.append(temp)
