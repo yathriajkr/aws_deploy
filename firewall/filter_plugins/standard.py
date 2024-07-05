@@ -3,12 +3,11 @@ def ftr_servobj(serv_data):
   return servobj
 
 def validate_servobj(std_config, device_config):
-  print(device_config)
   missing_servobj = []
   missing_serv_name = []
   for dev_data in device_config:
     missing_serv_name.append(dev_data['name'])
-  printmissing_serv_name
+  print(missing_serv_name)
   for servobj in std_config:
     # print("Enter obj")
     print(servobj)
