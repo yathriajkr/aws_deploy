@@ -107,14 +107,14 @@
       set_fact:
         missing_servobj: "{{ standard_service_object | validate_servobj(device_servobj_config) }}"
     
-    # - name: Create Service objects
-    #   paloaltonetworks.panos.panos_service_object:
-    #     provider: '{{ provider }}'
-    #     name: '{{ service_item.name }}'
-    #     destination_port: '{{ service_item.destination_port }}'
-    #   loop: '{{ missing_servobj }}'
-    #   loop_control:
-    #     loop_var: service_item
+    - name: Create Service objects
+      paloaltonetworks.panos.panos_service_object:
+        provider: '{{ provider }}'
+        name: '{{ service_item.name }}'
+        destination_port: '{{ service_item.destination_port }}'
+      loop: '{{ missing_servobj }}'
+      loop_control:
+        loop_var: service_item
   
     # - name: Create Routes
     #   paloaltonetworks.panos.panos_static_route:
