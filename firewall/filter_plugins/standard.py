@@ -3,7 +3,7 @@ def ftr_servobj(serv_data):
   return servobj
 
 def validate_servobj(std_config, device_config):
-  print(device_config
+  print(device_config)
   missing_addrobj = []
   temp = {}
   for servobj in std_config:
@@ -24,7 +24,7 @@ def ftr_addrobj(addr_data):
   return addrobj
 
 def validate_addrobj(std_config, device_config):
-  print(device_config
+  print(device_config)
   missing_addrobj = []
   temp = {}
   for addrobj in std_config:
