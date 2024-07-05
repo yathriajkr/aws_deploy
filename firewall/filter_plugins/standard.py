@@ -4,7 +4,7 @@ def ftr_servobj(serv_data):
 
 def validate_servobj(std_config, device_config):
   print(device_config)
-  missing_addrobj = []
+  missing_servobj = []
   temp = {}
   for servobj in std_config:
     # print("Enter obj")
