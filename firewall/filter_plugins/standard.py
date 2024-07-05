@@ -14,6 +14,7 @@ def validate_addrobj(std_config, device_config)
       # print("found match")
       temp = addrobj
       missing_addrobj.append(temp)
+  print(missing_addrobj)
   return missing_addrobj
 
 
