@@ -1,3 +1,22 @@
+def ftr_addrobj(addr_data):
+  addrobj =  addr_data['objects'][0]
+  return addrobj
+
+def validate_addrobj(std_config, device_config)
+  missing_addrobj = []
+  temp = {}
+  for addrobj in std_config:
+    # print("Enter zone")
+    print(addrobj)
+    temp = {}
+    if addrobj["name"] not in device_config:
+      # print("found match")
+      temp = addrobj
+      missing_addrobj.append(temp)
+  return missing_addrobj
+
+
+  
 def ftr_zone(device_data):
   # print(device_data)
   zones = device_data["ansible_facts"]["ansible_net_virtual-systems"][0]["vsys_zonelist"]
