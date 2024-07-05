@@ -11,12 +11,11 @@ def validate_servobj(std_config, device_config):
   for servobj in std_config:
     # print("Enter obj")
     print(servobj)
-    for dev_servobj in device_config:
-      temp = {}
-      if servobj["name"] not in missing_serv_name:
-        # print("found match")
-        temp = servobj
-        missing_servobj.append(temp)
+    temp = {}
+    if servobj["name"] not in missing_serv_name:
+      # print("found match")
+      temp = servobj
+      missing_servobj.append(temp)
   print(missing_servobj)
   
   return missing_servobj
