@@ -24,7 +24,7 @@ standard_address_object:
 - name: Database-objest
   value: 10.100.10.10
 
-Standard_service_object:
+standard_service_object:
 - name: service-tcp-22
   destination_port: 22
 - name: service-tcp-221
