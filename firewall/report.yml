@@ -22,7 +22,10 @@
         provider: '{{ provider }}'
         gather_subset: ['all']
       register: device_data
-        
+
+    - name: Print data
+      debug:
+        msg: "{{ device_data }}"
   #   - name: Create Virtual Router
   #     paloaltonetworks.panos.panos_virtual_router:
   #       provider: '{{ provider }}'
