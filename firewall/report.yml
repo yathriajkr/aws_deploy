@@ -20,7 +20,7 @@
     - name: Get  all facts
       paloaltonetworks.panos.panos_facts:
         provider: '{{ provider }}'
-        gather_subset: ['all']
+        gather_subset: ['system']
       register: device_data
 
     - name: Print data
