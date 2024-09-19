@@ -23,106 +23,106 @@
         gather_subset: ['all']
       register: device_data
         
-    - name: Create Virtual Router
-      paloaltonetworks.panos.panos_virtual_router:
-        provider: '{{ provider }}'
-        state: gathered
-      register: vrlist
+  #   - name: Create Virtual Router
+  #     paloaltonetworks.panos.panos_virtual_router:
+  #       provider: '{{ provider }}'
+  #       state: gathered
+  #     register: vrlist
 
-    - name: Print virtual router data
-      debug:
-        msg: "{{ vrlist }}"
+  #   - name: Print virtual router data
+  #     debug:
+  #       msg: "{{ vrlist }}"
         
-    - name: Parse the output
-      set_fact:
-       content_json: "{{ vrlist['gathered_xml'] | xml2json }}"
+  #   - name: Parse the output
+  #     set_fact:
+  #      content_json: "{{ vrlist['gathered_xml'] | xml2json }}"
 
-    - name: Print the static routes
-      debug:
-        msg: "{{ content_json }}"
+  #   - name: Print the static routes
+  #     debug:
+  #       msg: "{{ content_json }}"
 
-    #Remove from here 
-    - name: Filter the value for Zones
-      set_fact: 
-        device_zone_config: "{{ device_data | ftr_zone }}"
+  #   #Remove from here 
+  #   - name: Filter the value for Zones
+  #     set_fact: 
+  #       device_zone_config: "{{ device_data | ftr_zone }}"
         
-    - name: validate the device zones data against standards
-      set_fact:
-        missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
+  #   - name: validate the device zones data against standards
+  #     set_fact:
+  #       missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
 
-    - name: Create Zones as per standards
-      paloaltonetworks.panos.panos_zone:
-        provider: "{{ provider }}"
-        zone: "{{ zone_item.zone_name }}"
-        mode: "{{ zone_item.mode }}"
-      loop: "{{ missing_zone }}"
-      loop_control:
-        loop_var: zone_item
+  #   - name: Create Zones as per standards
+  #     paloaltonetworks.panos.panos_zone:
+  #       provider: "{{ provider }}"
+  #       zone: "{{ zone_item.zone_name }}"
+  #       mode: "{{ zone_item.mode }}"
+  #     loop: "{{ missing_zone }}"
+  #     loop_control:
+  #       loop_var: zone_item
 
-  #Remove till here 
+  # #Remove till here 
   
-    - name: Retrieve all address group object
-      paloaltonetworks.panos.panos_object_facts:
-        provider: '{{ provider }}'
-        name_regex: '.*.*'
-      register: addr_object_result
+  #   - name: Retrieve all address group object
+  #     paloaltonetworks.panos.panos_object_facts:
+  #       provider: '{{ provider }}'
+  #       name_regex: '.*.*'
+  #     register: addr_object_result
 
-    # - name: Print address group object data
-    #   debug:
-    #     msg: "{{ addr_object_result }}"
+  #   # - name: Print address group object data
+  #   #   debug:
+  #   #     msg: "{{ addr_object_result }}"
 
-    - name: Filter the values for the address objects
-      set_fact:
-        device_addrobj_config: "{{ addr_object_result | ftr_addrobj }}"
+  #   - name: Filter the values for the address objects
+  #     set_fact:
+  #       device_addrobj_config: "{{ addr_object_result | ftr_addrobj }}"
 
-    - name: Validate the device address object data against standards
-      set_fact:
-        missing_addrobj: "{{ standard_address_object | validate_addrobj(device_addrobj_config) }}"
+  #   - name: Validate the device address object data against standards
+  #     set_fact:
+  #       missing_addrobj: "{{ standard_address_object | validate_addrobj(device_addrobj_config) }}"
 
-    - name: Create Address objects
-      paloaltonetworks.panos.panos_address_object:
-        provider: '{{ provider }}'
-        name: '{{ address_item.name }}'
-        value: '{{ address_item.value }}'
-      loop: '{{ missing_addrobj }}'
-      loop_control:
-        loop_var: address_item
+  #   - name: Create Address objects
+  #     paloaltonetworks.panos.panos_address_object:
+  #       provider: '{{ provider }}'
+  #       name: '{{ address_item.name }}'
+  #       value: '{{ address_item.value }}'
+  #     loop: '{{ missing_addrobj }}'
+  #     loop_control:
+  #       loop_var: address_item
 
-    - name: Retrieve all service object
-      paloaltonetworks.panos.panos_object_facts:
-        provider: '{{ provider }}'
-        name_regex: '.*.*'
-        object_type: 'service'
-      register: serv_object_result
+  #   - name: Retrieve all service object
+  #     paloaltonetworks.panos.panos_object_facts:
+  #       provider: '{{ provider }}'
+  #       name_regex: '.*.*'
+  #       object_type: 'service'
+  #     register: serv_object_result
 
-    # - name: Print service object data
-    #   debug:
-    #     msg: "{{ serv_object_result }}"
+  #   # - name: Print service object data
+  #   #   debug:
+  #   #     msg: "{{ serv_object_result }}"
 
-    - name: Filter the values for the service objects
-      set_fact:
-        device_servobj_config: "{{ serv_object_result | ftr_servobj }}"
+  #   - name: Filter the values for the service objects
+  #     set_fact:
+  #       device_servobj_config: "{{ serv_object_result | ftr_servobj }}"
 
-    - name: Validate the device service object data against standards
-      set_fact:
-        missing_servobj: "{{ standard_service_object | validate_servobj(device_servobj_config) }}"
+  #   - name: Validate the device service object data against standards
+  #     set_fact:
+  #       missing_servobj: "{{ standard_service_object | validate_servobj(device_servobj_config) }}"
     
-    - name: Create Service objects
-      paloaltonetworks.panos.panos_service_object:
-        provider: '{{ provider }}'
-        name: '{{ service_item.name }}'
-        destination_port: '{{ service_item.destination_port }}'
-      loop: '{{ missing_servobj }}'
-      loop_control:
-        loop_var: service_item
+  #   - name: Create Service objects
+  #     paloaltonetworks.panos.panos_service_object:
+  #       provider: '{{ provider }}'
+  #       name: '{{ service_item.name }}'
+  #       destination_port: '{{ service_item.destination_port }}'
+  #     loop: '{{ missing_servobj }}'
+  #     loop_control:
+  #       loop_var: service_item
   
-    # - name: Create Routes
-    #   paloaltonetworks.panos.panos_static_route:
-    #     provider: '{{ provider }}'
-    #     name: '{{ route_item.name }}'
-    #     destination: '{{ route_item.destination }}'
-    #     nexthop: '{{ route_item.nexthop }}'
-    #     interface: '{{ route_item.interface }}'
-    #   loop: '{{ missing_routes }}'
-    #   loop_control:
-    #     loop_var: route_item
+  #   # - name: Create Routes
+  #   #   paloaltonetworks.panos.panos_static_route:
+  #   #     provider: '{{ provider }}'
+  #   #     name: '{{ route_item.name }}'
+  #   #     destination: '{{ route_item.destination }}'
+  #   #     nexthop: '{{ route_item.nexthop }}'
+  #   #     interface: '{{ route_item.interface }}'
+  #   #   loop: '{{ missing_routes }}'
+  #   #   loop_control:
+  #   #     loop_var: route_item
