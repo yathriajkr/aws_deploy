@@ -23,9 +23,18 @@
         gather_subset: ['all']
       register: device_data
 
+    - name: configure foo administrator
+      paloaltonetworks.panos.panos_administrator:
+        provider: '{{ provider }}'
+        superuser: true
+        state: gathered
+      register: system_info
+      
     - name: Print data
       debug:
-        msg: "{{ device_data }}"
+        msg: "{{ system_info }}"
+
+        
   #   - name: Create Virtual Router
   #     paloaltonetworks.panos.panos_virtual_router:
   #       provider: '{{ provider }}'
