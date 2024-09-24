@@ -1,6 +1,6 @@
 def keygen(hostname,username,password):
     
-    import xml.etree.ElementTree as ET
+    import xmltodict
     from ansible.module_utils.basic import to_text
     from ansible.module_utils.six.moves import urllib
     import requests
@@ -11,11 +11,13 @@ def keygen(hostname,username,password):
     
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
-    data = to_text(response.content)
-    root = ET.fromstring(data)
-    print(response.content)
-    print(root.findall("."))
-    print(root.attrib.items())
+    data = xmltodict.parse(response.content)
+    print(json.dumps(data))
+    # data = to_text(response.content)
+    # root = ET.fromstring(data)
+    # print(response.content)
+    # print(root.findall("."))
+    # print(root.attrib.items())
     apikey="dummy"
     return apikey
 
