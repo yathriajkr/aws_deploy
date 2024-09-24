@@ -40,10 +40,11 @@
     #     username: "{{ admin }}"
     #     password: "{{ }}"
     #   register: apikey
-    - name: Check if a node is active in HA pair
-      paloaltonetworks.panos.panos_active_in_ha:
-        provider: '{{ provider }}'
-      register: active_ha
+    - name: Check that secondary is now active
+      paloaltonetworks.panos.panos_op:
+        provider: '{{ secondary }}'
+        cmd: 'show high-availability state'
+      register: ha_data
       
     - name: Check that you can connect (GET) to a page and it returns a status 200
       ansible.builtin.uri:
