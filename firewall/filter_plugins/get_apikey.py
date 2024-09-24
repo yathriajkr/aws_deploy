@@ -1,4 +1,7 @@
 def keygen(hostname,username,password):
+    
+    import xml.etree.ElementTree as ET
+    from ansible.module_utils.basic import to_text
     from ansible.module_utils.six.moves import urllib
     import requests
     import json
@@ -8,10 +11,10 @@ def keygen(hostname,username,password):
     
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
-    json_object = json.loads(response.content)
-    json_formatted_str = json.dumps(json_object, indent=2)
+    data = to_text(http_response)
+    root = ET.fromstring(data)
     print(response.content)
-    print(json_formatted_str)
+    print(root)
     apikey="dummy"
     return apikey
 
