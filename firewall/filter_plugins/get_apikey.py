@@ -11,6 +11,7 @@ def keygen(hostname,username,password):
     json_object = json.loads(response.content)
     json_formatted_str = json.dumps(json_object, indent=2)
     print(response.content)
+    print(json_formatted_str)
     apikey="dummy"
     return apikey
 
