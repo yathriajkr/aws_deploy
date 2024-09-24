@@ -40,7 +40,11 @@
     #     username: "{{ admin }}"
     #     password: "{{ }}"
     #   register: apikey
-
+    - name: Check if a node is active in HA pair
+      panos_active_in_ha:
+        provider: '{{ provider }}'
+      register: active_ha
+      
     - name: Check that you can connect (GET) to a page and it returns a status 200
       ansible.builtin.uri:
         url: https://{{ provider.ip_address }}/api/?type=keygen&user={{provider.username}}&password={{provider.password}}
@@ -71,21 +75,21 @@
     #   debug:
     #     msg: apikey
         
-    - name: pull the networking information
-      set_fact:
-        interface_data: "{{ provider.ip_address | NetworkInterface(apikey) }}"
+    # - name: pull the networking information
+    #   set_fact:
+    #     interface_data: "{{ provider.ip_address | NetworkInterface(apikey) }}"
     
-    - name: Print the apikey
-      debug:
-        msg: interface_data
+    # - name: Print the apikey
+    #   debug:
+    #     msg: interface_data
         
-    - name: Update banner
-      set_fact:
-        banner_data: "{{ provider.ip_address | UpdateBanner(apikey) }}"
+    # - name: Update banner
+    #   set_fact:
+    #     banner_data: "{{ provider.ip_address | UpdateBanner(apikey) }}"
         
-    - name: Print Banner
-      debug:
-        msg: banner_data
+    # - name: Print Banner
+    #   debug:
+    #     msg: banner_data
         
   #   - name: Create Virtual Router
   #     paloaltonetworks.panos.panos_virtual_router:
