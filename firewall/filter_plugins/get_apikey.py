@@ -51,7 +51,7 @@ def UpdateBanner(hostname, apikey):
     
     url="https://{0}/api/type=config&action=set&xpath=/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system&element='TestBanner'&key={1}".format(hostname, apikey)
     headers = {'X-PAN-KEY': apikey}
-    response = requests.get(url, verify=False)
+    response = requests.post(url, verify=False)
     print(response)
 
     return response.content
