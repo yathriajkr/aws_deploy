@@ -76,6 +76,11 @@
         element: '<login-banner>{{ banner_text }}</login-banner>'
       register: banner_data
 
+    - name: commit Candidate config 
+      paloaltonetworks.panos.panos_commit_firewall:
+        provider: '{{ provider }}'
+      tags: commit
+    
     # - name: Set login banner
     #   panos_type_cmd:
     #     provider: '{{ provider }}'
