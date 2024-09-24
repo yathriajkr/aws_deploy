@@ -14,7 +14,7 @@ def keygen(hostname,username,password):
     data_decode=response.content.decode("utf-8")
     data = json.dumps(xmltodict.parse(data_decode))
     # data = json.dumps(xmltodict.parse(response.content))
-    
+    data = json.loads(data)
     print(data)
     print(type(data))
     # xml = fromstring(response.content))
