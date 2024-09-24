@@ -12,9 +12,8 @@ def keygen(hostname,username,password):
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
     data_decode=response.content.decode("utf-8")
-    data = json.loads(xmltodict.parse(data_decode))
-    # data = json.dumps(xmltodict.parse(response.content))
-    # data = json.loads(data)
+    data = json.dumps(xmltodict.parse(data_decode))
+    data = json.loads(data)
     print(data)
     print(type(data))
     # xml = fromstring(response.content))
@@ -26,7 +25,7 @@ def keygen(hostname,username,password):
     # print(root.findall("."))
     # print(root.attrib.items())
     # apikey=data["response"]["result"]["key"]
-    apikey='dummy'
+    apikey = data['response']['result']['key']
     return apikey
 
 class FilterModule(object):
