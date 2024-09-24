@@ -44,13 +44,19 @@
     - name: Get the api key
       set_fact:
         apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
+        
       
     - name: Print the apikey
       debug:
         msg: apikey
+        
+    - name: pull the networking information
+      set_fact:
+        interface_data: "{{ provider.ip_address | keygen(apikey) }}"
     
-      
-
+    - name: Print the apikey
+      debug:
+        msg: interface_data
         
   #   - name: Create Virtual Router
   #     paloaltonetworks.panos.panos_virtual_router:
