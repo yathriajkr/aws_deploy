@@ -17,11 +17,11 @@
     #   retries: 50
     #   delay: 30
 
-    - name: Get  all facts
-      paloaltonetworks.panos.panos_facts:
-        provider: '{{ provider }}'
-        gather_subset: ['all']
-      register: device_data
+    # - name: Get  all facts
+    #   paloaltonetworks.panos.panos_facts:
+    #     provider: '{{ provider }}'
+    #     gather_subset: ['all']
+    #   register: device_data
 
     # - name: configure foo administrator
     #   paloaltonetworks.panos.panos_administrator:
