@@ -1,4 +1,5 @@
 def keygen(hostname,username,password):
+    from ansible.module_utils.six.moves import urllib
     import requests
     import json
 
