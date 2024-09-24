@@ -67,7 +67,7 @@
       set_fact:
        apikey: "{{ apikey_content['response']['result']['key'] }}"
 
-    - name: set dns and panorama
+    - name: Check dns and panorama
       paloaltonetworks.panos.panos_mgtconfig:
         provider: '{{ provider }}'
       register: mgmtconfig
