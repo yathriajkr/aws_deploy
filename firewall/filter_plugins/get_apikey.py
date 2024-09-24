@@ -36,11 +36,14 @@ def NetworkInterface(hostname,apikey):
     headers = {'X-PAN-KEY': apikey}
     location = {'location': 'vsys', 'vsys': 'vsys1'}
     response = requests.get(url, params=location, verify=False, headers=headers)
+    print(response)
+    
 
 
 class FilterModule(object):
     def filters(self):
         return {
-            'keygen': keygen
+            'keygen': keygen,
+            'NetworkInterface': NetworkInterface
         
         }
