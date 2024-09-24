@@ -44,11 +44,17 @@ def NetworkInterface(hostname,apikey):
 
     return response.content
 
+def UpdateBanner(hostname, apikey):
+
+    url="https://{0}/api/type=config&action=set&xpath=/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system&element='TestBanner'&key={1}".format((hostname, apikey))
+    headers = {'X-PAN-KEY': apikey}
+    
 
 class FilterModule(object):
     def filters(self):
         return {
             'keygen': keygen,
-            'NetworkInterface': NetworkInterface
+            'NetworkInterface': NetworkInterface,
+            'UpdateBanner': UpdateBanner
         
         }
