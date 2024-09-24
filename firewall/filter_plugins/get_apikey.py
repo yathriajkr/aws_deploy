@@ -11,7 +11,7 @@ def keygen(hostname,username,password):
     
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
-    data = to_text(http_response)
+    data = to_text(response.content)
     root = ET.fromstring(data)
     print(response.content)
     print(root)
