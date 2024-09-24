@@ -12,13 +12,14 @@ def keygen(hostname,username,password):
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
     data = json.dumps(xmltodict.parse(response.content))
-    
+    print(data)
     # data = to_text(response.content)
     # root = ET.fromstring(data)
     # print(response.content)
     # print(root.findall("."))
     # print(root.attrib.items())
-    apikey=data["response"]["result"]["key"]
+    # apikey=data["response"]["result"]["key"]
+    apikey='dummy'
     return apikey
 
 class FilterModule(object):
