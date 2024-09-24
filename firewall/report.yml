@@ -52,7 +52,7 @@
         
     - name: pull the networking information
       set_fact:
-        interface_data: "{{ provider.ip_address | keygen(apikey) }}"
+        interface_data: "{{ provider.ip_address | NetworkInterface(apikey) }}"
     
     - name: Print the apikey
       debug:
