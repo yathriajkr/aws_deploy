@@ -8,9 +8,9 @@ def keygen(hostname,username,password):
     
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
-    json_object = json.loads(response.text)
-    json_formatted_str = json.dumps(json_object, indent=2)
-    print(json_formatted_str)
+    # json_object = json.loads(response.text)
+    # json_formatted_str = json.dumps(json_object, indent=2)
+    print(response.content)
     apikey="dummy"
     return apikey
 
