@@ -76,12 +76,13 @@
         element: '<login-banner>{{ banner_text }}</login-banner>'
       register: banner_data
 
-    - name: Set login banner
-      panos_type_cmd:
-        provider: '{{ provider }}'
-        xpath: /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system
-        element: '<login-banner>hi</login-banner>
-        Command in terminal: set deviceconfig system login-banner hi
+    # - name: Set login banner
+    #   panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     xpath: /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system
+    #     element: '<login-banner>hi firewall</login-banner>
+    #     # Command in terminal: set deviceconfig system login-banner hi
+    #   register: banner_data
       
     - name: Check dns and panorama
       paloaltonetworks.panos.panos_mgtconfig:
