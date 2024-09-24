@@ -1,9 +1,6 @@
 def keygen(hostname,username,password):
     
     import xmltodict
-    import xmljson
-    from lxml.etree import fromstring, tostring
-    
     from ansible.module_utils.basic import to_text
     from ansible.module_utils.six.moves import urllib
     import requests
