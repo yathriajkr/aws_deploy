@@ -42,7 +42,7 @@
     #   register: apikey
     - name: Check that secondary is now active
       paloaltonetworks.panos.panos_op:
-        provider: '{{ secondary }}'
+        provider: '{{ provider }}'
         cmd: 'show high-availability state'
       register: ha_data
       
