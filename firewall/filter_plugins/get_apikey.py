@@ -37,7 +37,8 @@ def NetworkInterface(hostname,apikey):
     location = {'location': 'vsys', 'vsys': 'vsys1'}
     response = requests.get(url, params=location, verify=False, headers=headers)
     print(response)
-    
+
+    return response.content
 
 
 class FilterModule(object):
