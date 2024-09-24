@@ -35,6 +35,15 @@
         msg: "{{ system_info }}"
 
     - name: Get the api key
+      connect:
+        username: "{{}}"
+        password: "{{}}"
+      register: apikey
+      
+    - name: Print the apikey
+      debug:
+        msg: apikey
+    
       
 
         
