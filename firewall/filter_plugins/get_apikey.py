@@ -13,6 +13,7 @@ def keygen(hostname,username,password):
     response = requests.get(url, verify=False,)
     data = json.dumps(xmltodict.parse(response.content))
     print(data)
+    print(type(data))
     # data = to_text(response.content)
     # root = ET.fromstring(data)
     # print(response.content)
