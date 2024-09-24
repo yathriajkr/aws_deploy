@@ -62,7 +62,7 @@
       set_fact:
         banner_data: "{{ provider.ip_address | UpdateBanner(apikey) }}"
         
-     - name: Print Banner
+    - name: Print Banner
       debug:
         msg: banner_data
         
