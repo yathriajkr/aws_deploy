@@ -40,7 +40,7 @@
     #     username: "{{ admin }}"
     #     password: "{{ }}"
     #   register: apikey
-    - name: Check that secondary is now active
+    - name: Check that HA is now active
       paloaltonetworks.panos.panos_op:
         provider: '{{ provider }}'
         cmd: 'show high-availability state'
@@ -66,6 +66,11 @@
     - name: Set apikey
       set_fact:
        apikey: "{{ apikey_content['response']['result']['key'] }}"
+
+    - name: set dns and panorama
+      paloaltonetworks.panos.panos_mgtconfig:
+        provider: '{{ provider }}'
+      register: mgmtconfig
         
     # - name: Get the api key
     #   set_fact:
