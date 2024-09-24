@@ -52,7 +52,7 @@
 
     - name: Print the apikey
       debug:
-        msg: apikey.content
+        msg: "{{ apikey.content }}"
 
     - name: Parse the output
       set_fact:
@@ -60,7 +60,7 @@
 
     - name: Print the apikey
       debug:
-        msg: content_json
+        msg: "{{ content_json }}"
         
     - name: Get the api key
       set_fact:
