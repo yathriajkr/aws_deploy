@@ -41,7 +41,7 @@
     #     password: "{{ }}"
     #   register: apikey
     - name: Check if a node is active in HA pair
-      panos_active_in_ha:
+      paloaltonetworks.panos.panos_active_in_ha:
         provider: '{{ provider }}'
       register: active_ha
       
