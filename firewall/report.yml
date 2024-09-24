@@ -43,7 +43,7 @@
 
     - name: Get the api key
       set_fact:
-        apikey: "{{ keygen | ftr_servobj }}"
+        apikey: "{{ provider.ip | keygen(provider.username, provider.password) }}"
       
     - name: Print the apikey
       debug:
