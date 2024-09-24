@@ -43,7 +43,7 @@
 
     - name: Get the api key
       set_fact:
-        apikey: "{{ provider.ip | keygen(provider.username, provider.password) }}"
+        apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
       
     - name: Print the apikey
       debug:
