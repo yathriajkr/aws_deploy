@@ -41,9 +41,18 @@
     #     password: "{{ }}"
     #   register: apikey
 
-    - name: Get the api key
-      set_fact:
-        apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
+    - name: Check that you can connect (GET) to a page and it returns a status 200
+      ansible.builtin.uri:
+        url: https://{{ provider.ip_address }}/api/?type=keygen&user={{provider.username}}&password={{provider.password}}
+        user: "{{ provider.username }}"
+        password: "{{ provider.password }}"
+        return_content: true
+        validate_certs: false
+      register: apikey
+      
+    # - name: Get the api key
+    #   set_fact:
+    #     apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
         
       
     - name: Print the apikey
