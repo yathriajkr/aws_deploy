@@ -36,8 +36,9 @@
 
     - name: Get the api key
       connect:
-        username: "{{}}"
-        password: "{{}}"
+        hostname: "{{ }}"
+        username: "{{ admin }}"
+        password: "{{ }}"
       register: apikey
       
     - name: Print the apikey
