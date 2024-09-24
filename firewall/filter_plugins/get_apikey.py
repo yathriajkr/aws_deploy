@@ -31,6 +31,9 @@ def keygen(hostname,username,password):
 
 def NetworkInterface(hostname,apikey):
 
+    import requests
+    import json
+
     uri = '/restapi/v10.2/Network/EthernetInterfaces'
     url = 'https://{0}{1}'.format(hostname, uri)
     headers = {'X-PAN-KEY': apikey}
