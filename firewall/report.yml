@@ -48,28 +48,28 @@
         password: "{{ provider.password }}"
         return_content: true
         validate_certs: false
-      register: apikey
-
-    - name: Print the apikey
-      debug:
-        msg: "{{ apikey.content }}"
+      register: raw_apikey
 
     - name: Parse the output
       set_fact:
-       content_json: "{{ apikey['content'] | xml2json }}"
+       apikey_content: "{{ raw_apikey['content'] | xml2json }}"
 
     - name: Print the apikey
       debug:
-        msg: "{{ content_json }}"
+        msg: "{{ apikey_content['response']['result']['key'] }}"
         
-    - name: Get the api key
+    - name: Set apikey
       set_fact:
-        apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
+       apikey: "{{ apikey_content['response']['result']['key'] }}"
+        
+    # - name: Get the api key
+    #   set_fact:
+    #     apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
         
       
-    - name: Print the apikey
-      debug:
-        msg: apikey
+    # - name: Print the apikey
+    #   debug:
+    #     msg: apikey
         
     - name: pull the networking information
       set_fact:
