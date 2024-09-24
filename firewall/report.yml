@@ -34,12 +34,16 @@
       debug:
         msg: "{{ system_info }}"
 
+    # - name: Get the api key
+    #   connect:
+    #     hostname: "{{ }}"
+    #     username: "{{ admin }}"
+    #     password: "{{ }}"
+    #   register: apikey
+
     - name: Get the api key
-      connect:
-        hostname: "{{ }}"
-        username: "{{ admin }}"
-        password: "{{ }}"
-      register: apikey
+      set_fact:
+        apikey: "{{ keygen | ftr_servobj }}"
       
     - name: Print the apikey
       debug:
