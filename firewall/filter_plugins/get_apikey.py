@@ -28,6 +28,16 @@ def keygen(hostname,username,password):
     apikey = data['response']['result']['key']
     return apikey
 
+
+def NetworkInterface(hostname,apikey):
+
+    uri = '/restapi/v10.2/Network/EthernetInterfaces'
+    url = 'https://{0}{1}'.format(hostname, uri)
+    headers = {'X-PAN-KEY': apikey}
+    location = {'location': 'vsys', 'vsys': 'vsys1'}
+    response = requests.get(url, params=location, verify=False, headers=headers)
+
+
 class FilterModule(object):
     def filters(self):
         return {
