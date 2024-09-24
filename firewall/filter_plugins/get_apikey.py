@@ -11,7 +11,10 @@ def keygen(hostname,username,password):
     
     url = 'https://{0}/api/?{1}'.format(hostname, data)
     response = requests.get(url, verify=False,)
-    data = json.dumps(xmltodict.parse(response.content))
+    data_decode=response.content.decode("utf-8")
+    data = json.dumps(xmltodict.parse(data_decode))
+    # data = json.dumps(xmltodict.parse(response.content))
+    
     print(data)
     print(type(data))
     # xml = fromstring(response.content))
