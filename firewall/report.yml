@@ -53,6 +53,14 @@
     - name: Print the apikey
       debug:
         msg: apikey.content
+
+    - name: Parse the output
+      set_fact:
+       content_json: "{{ apikey['content'] | xml2json }}"
+
+    - name: Print the apikey
+      debug:
+        msg: content_json
         
     - name: Get the api key
       set_fact:
