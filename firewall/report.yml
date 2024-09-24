@@ -30,9 +30,9 @@
     #     state: gathered
     #   register: system_info
       
-    - name: Print data
-      debug:
-        msg: "{{ device_data }}"
+    # - name: Print data
+    #   debug:
+    #     msg: "{{ device_data }}"
 
     # - name: Get the api key
     #   connect:
