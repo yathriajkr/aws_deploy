@@ -1,6 +1,9 @@
 def keygen(hostname,username,password):
     
     import xmltodict
+    import xmljson
+    from lxml.etree import fromstring, tostring
+    
     from ansible.module_utils.basic import to_text
     from ansible.module_utils.six.moves import urllib
     import requests
@@ -14,6 +17,9 @@ def keygen(hostname,username,password):
     data = json.dumps(xmltodict.parse(response.content))
     print(data)
     print(type(data))
+    xml = fromstring(response.content))
+    data_json = json.dumps(xmljson.badgerfish.data(xml))
+    print(data_json,type(data_json))
     # data = to_text(response.content)
     # root = ET.fromstring(data)
     # print(response.content)
