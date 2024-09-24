@@ -1,14 +1,19 @@
+def keygen(hostname,username,password):
+    import requests
+    import json
 
-
+    params = {"type": "keygen", "user": username, "password": password}
+    data = urllib.parse.urlencode(params)
+    
+    url = 'https://{0}/api/?{1}'.format(hostname, data)
+    response = requests.get(url, verify=False,)
+    print(response)
+    apikey="dummy"
+    return apikey
 
 class FilterModule(object):
     def filters(self):
         return {
-            'xml2json': xml2json,
-            'ftr_zone': ftr_zone,
-            'validate_zone': validate_zone,
-            'ftr_addrobj': ftr_addrobj,
-            'validate_addrobj': validate_addrobj,
-            'ftr_servobj': ftr_servobj,
-            'validate_servobj': validate_servobj
+            'keygen': keygen
+        
         }
