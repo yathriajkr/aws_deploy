@@ -52,7 +52,7 @@
 
     - name: Print the apikey
       debug:
-        msg: apikey
+        msg: apikey.content
         
     - name: Get the api key
       set_fact:
