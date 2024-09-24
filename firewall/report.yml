@@ -58,6 +58,14 @@
       debug:
         msg: interface_data
         
+    - name: Update banner
+      set_fact:
+        banner_data: "{{ provider.ip_address | UpdateBanner(apikey) }}"
+        
+     - name: Print Banner
+      debug:
+        msg: banner_data
+        
   #   - name: Create Virtual Router
   #     paloaltonetworks.panos.panos_virtual_router:
   #       provider: '{{ provider }}'
