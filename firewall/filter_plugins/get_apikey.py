@@ -37,7 +37,8 @@ def NetworkInterface(hostname,apikey):
     uri = '/restapi/v10.2/Network/EthernetInterfaces'
     url = 'https://{0}{1}'.format(hostname, uri)
     headers = {'X-PAN-KEY': apikey}
-    location = {'location': 'vsys', 'vsys': 'vsys1'}
+    # location = {'location': 'vsys', 'vsys': 'vsys1'}
+    location = 'panorama-pushed'
     response = requests.get(url, params=location, verify=False, headers=headers)
     print(response)
 
