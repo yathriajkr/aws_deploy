@@ -14,7 +14,7 @@ def keygen(hostname,username,password):
     data = to_text(response.content)
     root = ET.fromstring(data)
     print(response.content)
-    print(root)
+    print(root.attrib)
     apikey="dummy"
     return apikey
 
