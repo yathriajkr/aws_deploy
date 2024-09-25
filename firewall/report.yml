@@ -79,7 +79,8 @@
     - name: Configure password
       paloaltonetworks.panos.panos_config_element:
         provider: '{{ provider }}'
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/mgt-config/password-complexity"
+        # xpath: "/config/devices/entry[@name='localhost.localdomain']/config/mgt-config/password-complexity"
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting|/config/mgt-config/password-complexity
         element: '<minimum-length>14</minimum-length>'
         
     - name: commit Candidate config 
