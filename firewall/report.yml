@@ -76,14 +76,14 @@
     #     element: '<login-banner>{{ banner_text }}</login-banner>'
     #   register: banner_data
 
-    - name: Show the password data object.
+    - name: Show the system data.
       paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
         cmd: 'get'
         xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
       register: password_data
       
-    - name: Show the password data object.
+    - name: Show the password data.
       paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
         cmd: 'get'
