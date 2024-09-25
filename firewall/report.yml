@@ -76,6 +76,13 @@
         element: '<login-banner>{{ banner_text }}</login-banner>'
       register: banner_data
 
+    - name: Configure password
+      paloaltonetworks.panos.panos_config_element:
+        provider: '{{ provider }}'
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/mgt-config/password-complexity"
+        element: '<minimum-length>14</minimum-length>'
+        
+  element: '<minimum-length>14</minimum-length>
     - name: commit Candidate config 
       paloaltonetworks.panos.panos_commit_firewall:
         provider: '{{ provider }}'
