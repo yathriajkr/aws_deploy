@@ -106,9 +106,7 @@
         element: '<minimum-length>14</minimum-length>'
       register: password_match
       
-    - name: commit Candidate config 
-      paloaltonetworks.panos.panos_commit_firewall:
-        provider: '{{ provider }}'
+ 
 
         # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system|
         # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting|/config/mgt-config/password-complexity
@@ -117,15 +115,19 @@
     - name: Set login banner
       panos_type_cmd:
         provider: '{{ provider }}'
-        xpath: /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
         element: '<login-banner>hi firewall</login-banner>
         # Command in terminal: set deviceconfig system login-banner hi
       register: banner_data
-      
-    - name: Check dns and panorama
-      paloaltonetworks.panos.panos_mgtconfig:
+
+   - name: commit Candidate config 
+      paloaltonetworks.panos.panos_commit_firewall:
         provider: '{{ provider }}'
-      register: mgmtconfig
+        
+    # - name: Check dns and panorama
+    #   paloaltonetworks.panos.panos_mgtconfig:
+    #     provider: '{{ provider }}'
+    #   register: mgmtconfig
         
     # - name: Get the api key
     #   set_fact:
