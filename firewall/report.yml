@@ -113,7 +113,7 @@
   
     
     - name: Set login banner
-      panos_type_cmd:
+      paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
         xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
         element: '<login-banner>hi firewall</login-banner>'
@@ -121,8 +121,8 @@
       register: banner_data
 
    - name: commit Candidate config 
-      paloaltonetworks.panos.panos_commit_firewall:
-        provider: '{{ provider }}'
+     paloaltonetworks.panos.panos_commit_firewall:
+       provider: '{{ provider }}'
         
     # - name: Check dns and panorama
     #   paloaltonetworks.panos.panos_mgtconfig:
