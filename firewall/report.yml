@@ -17,11 +17,11 @@
     #   retries: 50
     #   delay: 30
 
-    - name: Get  all facts
-      paloaltonetworks.panos.panos_facts:
-        provider: '{{ provider }}'
-        gather_subset: ['all']
-      register: device_data
+    # - name: Get  all facts
+    #   paloaltonetworks.panos.panos_facts:
+    #     provider: '{{ provider }}'
+    #     gather_subset: ['all']
+    #   register: device_data
 
     # - name: configure foo administrator
     #   paloaltonetworks.panos.panos_administrator:
@@ -30,9 +30,9 @@
     #     state: gathered
     #   register: system_info
       
-    - name: Print data
-      debug:
-        msg: "{{ device_data }}"
+    # - name: Print data
+    #   debug:
+    #     msg: "{{ device_data }}"
 
     # - name: Get the api key
     #   connect:
@@ -40,32 +40,32 @@
     #     username: "{{ admin }}"
     #     password: "{{ }}"
     #   register: apikey
-    - name: Check that HA is now active
-      paloaltonetworks.panos.panos_op:
-        provider: '{{ provider }}'
-        cmd: 'show high-availability state'
-      register: ha_data
+    # - name: Check that HA is now active
+    #   paloaltonetworks.panos.panos_op:
+    #     provider: '{{ provider }}'
+    #     cmd: 'show high-availability state'
+    #   register: ha_data
       
-    - name: Check that you can connect (GET) to a page and it returns a status 200
-      ansible.builtin.uri:
-        url: https://{{ provider.ip_address }}/api/?type=keygen&user={{provider.username}}&password={{provider.password}}
-        user: "{{ provider.username }}"
-        password: "{{ provider.password }}"
-        return_content: true
-        validate_certs: false
-      register: raw_apikey
+    # - name: Check that you can connect (GET) to a page and it returns a status 200
+    #   ansible.builtin.uri:
+    #     url: https://{{ provider.ip_address }}/api/?type=keygen&user={{provider.username}}&password={{provider.password}}
+    #     user: "{{ provider.username }}"
+    #     password: "{{ provider.password }}"
+    #     return_content: true
+    #     validate_certs: false
+    #   register: raw_apikey
 
-    - name: Parse the output
-      set_fact:
-       apikey_content: "{{ raw_apikey['content'] | xml2json }}"
+    # - name: Parse the output
+    #   set_fact:
+    #    apikey_content: "{{ raw_apikey['content'] | xml2json }}"
 
-    - name: Print the apikey
-      debug:
-        msg: "{{ apikey_content['response']['result']['key'] }}"
+    # - name: Print the apikey
+    #   debug:
+    #     msg: "{{ apikey_content['response']['result']['key'] }}"
         
-    - name: Set apikey
-      set_fact:
-       apikey: "{{ apikey_content['response']['result']['key'] }}"
+    # - name: Set apikey
+    #   set_fact:
+    #    apikey: "{{ apikey_content['response']['result']['key'] }}"
 
     - name: Configure login banner
       vars:
@@ -80,13 +80,16 @@
       paloaltonetworks.panos.panos_config_element:
         provider: '{{ provider }}'
         # xpath: "/config/devices/entry[@name='localhost.localdomain']/config/mgt-config/password-complexity"
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/config/mgt-config/password-complexity"
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/config/mgt-config/password-complexity"
         element: '<minimum-length>14</minimum-length>'
       register: password_match
       
     - name: commit Candidate config 
       paloaltonetworks.panos.panos_commit_firewall:
         provider: '{{ provider }}'
+
+        # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system|
+        # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting|/config/mgt-config/password-complexity
   
     
     # - name: Set login banner
