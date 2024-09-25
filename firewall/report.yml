@@ -67,25 +67,32 @@
     #   set_fact:
     #    apikey: "{{ apikey_content['response']['result']['key'] }}"
 
-    - name: Configure login banner
-      vars:
-        banner_text: 'Authorized Personnel Only!'
-      paloaltonetworks.panos.panos_config_element:
-        provider: '{{ provider }}'
-        xpath: '/config/devices/entry[@name="localhost.localdomain"]/deviceconfig/system'
-        element: '<login-banner>{{ banner_text }}</login-banner>'
-      register: banner_data
+    # - name: Configure login banner
+    #   vars:
+    #     banner_text: 'Authorized Personnel Only!'
+    #   paloaltonetworks.panos.panos_config_element:
+    #     provider: '{{ provider }}'
+    #     xpath: '/config/devices/entry[@name="localhost.localdomain"]/deviceconfig/system'
+    #     element: '<login-banner>{{ banner_text }}</login-banner>'
+    #   register: banner_data
 
-    - name: Configure password complecity
-      paloaltonetworks.panos.panos_config_element:
+    - name: Show the password data object.
+      paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
-        xpath: "/config/mgt-config/password-complexity"
-        element: '<minimum-length>14</minimum-length>'
-      register: password_match
+        cmd: 'get'
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+      register: password_data
+
+    # - name: Configure password complecity
+    #   paloaltonetworks.panos.panos_config_element:
+    #     provider: '{{ provider }}'
+    #     xpath: "/config/mgt-config/password-complexity"
+    #     element: '<minimum-length>14</minimum-length>'
+    #   register: password_match
       
-    - name: commit Candidate config 
-      paloaltonetworks.panos.panos_commit_firewall:
-        provider: '{{ provider }}'
+    # - name: commit Candidate config 
+    #   paloaltonetworks.panos.panos_commit_firewall:
+    #     provider: '{{ provider }}'
 
         # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system|
         # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting|/config/mgt-config/password-complexity
