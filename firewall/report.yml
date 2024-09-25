@@ -89,6 +89,16 @@
         cmd: 'get'
         xpath: "/config/mgt-config/password-complexity"
       register: password_settings
+
+
+    - name: Show the HTTP and Telnet disable data.
+      paloaltonetworks.panos.panos_type_cmd:
+        provider: '{{ provider }}'
+        cmd: 'get'
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+      register: password_settings
+  
+      
     # - name: Configure password complecity
     #   paloaltonetworks.panos.panos_config_element:
     #     provider: '{{ provider }}'
