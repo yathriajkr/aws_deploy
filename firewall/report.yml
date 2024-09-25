@@ -119,10 +119,10 @@
         element: '<login-banner>hi firewall</login-banner>'
         # Command in terminal: set deviceconfig system login-banner hi
       register: banner_data
-
-   - name: commit Candidate config 
-     paloaltonetworks.panos.panos_commit_firewall:
-       provider: '{{ provider }}'
+      
+    - name: commit Candidate config 
+      paloaltonetworks.panos.panos_commit_firewall:
+        provider: '{{ provider }}'
         
     # - name: Check dns and panorama
     #   paloaltonetworks.panos.panos_mgtconfig:
