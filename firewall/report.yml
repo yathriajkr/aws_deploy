@@ -116,7 +116,7 @@
       panos_type_cmd:
         provider: '{{ provider }}'
         xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
-        element: '<login-banner>hi firewall</login-banner>
+        element: '<login-banner>hi firewall</login-banner>'
         # Command in terminal: set deviceconfig system login-banner hi
       register: banner_data
 
