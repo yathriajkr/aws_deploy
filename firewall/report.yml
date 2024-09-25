@@ -76,11 +76,9 @@
         element: '<login-banner>{{ banner_text }}</login-banner>'
       register: banner_data
 
-    - name: Configure password
+    - name: Configure password complecity
       paloaltonetworks.panos.panos_config_element:
         provider: '{{ provider }}'
-        # xpath: "/config/devices/entry[@name='localhost.localdomain']/config/mgt-config/password-complexity"
-        # xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/config/mgt-config/password-complexity"
         xpath: "/config/mgt-config/password-complexity"
         element: '<minimum-length>14</minimum-length>'
       register: password_match
