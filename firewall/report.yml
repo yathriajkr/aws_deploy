@@ -17,11 +17,11 @@
     #   retries: 50
     #   delay: 30
 
-    - name: Get  all facts
-      paloaltonetworks.panos.panos_facts:
-        provider: '{{ provider }}'
-        gather_subset: ['all']
-      register: device_data
+    # - name: Get  all facts
+    #   paloaltonetworks.panos.panos_facts:
+    #     provider: '{{ provider }}'
+    #     gather_subset: ['all']
+    #   register: device_data
 
     # - name: configure foo administrator
     #   paloaltonetworks.panos.panos_administrator:
@@ -30,9 +30,9 @@
     #     state: gathered
     #   register: system_info
       
-    - name: Print data
-      debug:
-        msg: "{{ device_data }}"
+    # - name: Print data
+    #   debug:
+    #     msg: "{{ device_data }}"
 
     # - name: Get the api key
     #   connect:
@@ -107,12 +107,12 @@
       register: password_settings
   
       
-    - name: Configure password complecity
-      paloaltonetworks.panos.panos_config_element:
-        provider: '{{ provider }}'
-        xpath: "/config/mgt-config/password-complexity"
-        element: '<minimum-length>14</minimum-length>'
-      register: password_match
+    # - name: Configure password complecity
+    #   paloaltonetworks.panos.panos_config_element:
+    #     provider: '{{ provider }}'
+    #     xpath: "/config/mgt-config/password-complexity"
+    #     element: '<minimum-length>14</minimum-length>'
+    #   register: password_match
       
  
 
@@ -120,17 +120,17 @@
         # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting|/config/mgt-config/password-complexity
   
     
-    - name: Set login banner
-      paloaltonetworks.panos.panos_type_cmd:
-        provider: '{{ provider }}'
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
-        element: '<login-banner>hi firewall</login-banner>'
-        # Command in terminal: set deviceconfig system login-banner hi
-      register: banner_data
+    # - name: Set login banner
+    #   paloaltonetworks.panos.panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+    #     element: '<login-banner>hi firewall</login-banner>'
+    #     # Command in terminal: set deviceconfig system login-banner hi
+    #   register: banner_data
       
-    - name: commit Candidate config 
-      paloaltonetworks.panos.panos_commit_firewall:
-        provider: '{{ provider }}'
+    # - name: commit Candidate config 
+    #   paloaltonetworks.panos.panos_commit_firewall:
+    #     provider: '{{ provider }}'
         
     # - name: Check dns and panorama
     #   paloaltonetworks.panos.panos_mgtconfig:
