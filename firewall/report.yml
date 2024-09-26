@@ -87,7 +87,8 @@
       paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
         cmd: 'get'
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management/idle-timeout"
+        # xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management/idle-timeout"
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/authentication-profile"
       register: time_outdata
       
       
