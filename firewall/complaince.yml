@@ -53,6 +53,15 @@
     - name: Print the EDL data
       debug:
         msg: "{{ service_route_edl }}"
+
+    - name: Parse the output
+      set_fact:
+       data_content: "{{ service_route_edl['stdout_xml'] | xml2json }}"
+
+    - name: Print the apikey
+      debug:
+        msg: "{{ data_content }}"
+
     
   
       
