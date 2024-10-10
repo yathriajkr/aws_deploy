@@ -13,7 +13,6 @@
         gather_subset: ['all']
       register: device_data
 
-
     - name: Show the system data.
       paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
@@ -44,6 +43,18 @@
         cmd: 'get'
         xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
       register: password_settings
+
+    - name: Show EDL service route
+      paloaltonetworks.panos.panos_type_cmd:
+        provider: '{{ provider }}'
+        cmd: 'get'
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/route"
+      register: service_route_edl
+
+    - name: Print the EDL data
+      debug:
+        msg: "{{ service_route_edl }}"
+    
   
       
     # - name: Configure password complecity
@@ -101,43 +112,6 @@
     #   debug:
     #     msg: banner_data
         
-  #   - name: Create Virtual Router
-  #     paloaltonetworks.panos.panos_virtual_router:
-  #       provider: '{{ provider }}'
-  #       state: gathered
-  #     register: vrlist
-
-  #   - name: Print virtual router data
-  #     debug:
-  #       msg: "{{ vrlist }}"
-        
-  #   - name: Parse the output
-  #     set_fact:
-  #      content_json: "{{ vrlist['gathered_xml'] | xml2json }}"
-
-  #   - name: Print the static routes
-  #     debug:
-  #       msg: "{{ content_json }}"
-
-  #   #Remove from here 
-  #   - name: Filter the value for Zones
-  #     set_fact: 
-  #       device_zone_config: "{{ device_data | ftr_zone }}"
-        
-  #   - name: validate the device zones data against standards
-  #     set_fact:
-  #       missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
-
-  #   - name: Create Zones as per standards
-  #     paloaltonetworks.panos.panos_zone:
-  #       provider: "{{ provider }}"
-  #       zone: "{{ zone_item.zone_name }}"
-  #       mode: "{{ zone_item.mode }}"
-  #     loop: "{{ missing_zone }}"
-  #     loop_control:
-  #       loop_var: zone_item
-
-  # #Remove till here 
   
   #   - name: Retrieve all address group object
   #     paloaltonetworks.panos.panos_object_facts:
