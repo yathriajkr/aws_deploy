@@ -6,7 +6,6 @@
     - standard_config.yml    
 
   tasks:
-  
     - name: Get  all facts
       paloaltonetworks.panos.panos_facts:
         provider: '{{ provider }}'
@@ -48,7 +47,7 @@
       paloaltonetworks.panos.panos_type_cmd:
         provider: '{{ provider }}'
         cmd: 'get'
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/route"
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/route/service"
       register: service_route_edl
 
     - name: Print the EDL data
