@@ -1,1 +1,206 @@
+---
+- name: Check for complaince and configure Standard configs
+  hosts: pa-fw
+  connection: local
+  vars_files:
+    - standard_config.yml    
 
+  tasks:
+  
+    - name: Get  all facts
+      paloaltonetworks.panos.panos_facts:
+        provider: '{{ provider }}'
+        gather_subset: ['all']
+      register: device_data
+
+
+    - name: Show the system data.
+      paloaltonetworks.panos.panos_type_cmd:
+        provider: '{{ provider }}'
+        cmd: 'get'
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+      register: password_data
+
+    - name: Show the idle timeout data.
+      paloaltonetworks.panos.panos_type_cmd:
+        provider: '{{ provider }}'
+        cmd: 'get'
+        # xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management/idle-timeout"
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management"
+      register: time_outdata
+      
+      
+    - name: Show the password data.
+      paloaltonetworks.panos.panos_type_cmd:
+        provider: '{{ provider }}'
+        cmd: 'get'
+        xpath: "/config/mgt-config/password-complexity"
+      register: password_settings
+
+
+    - name: Show the HTTP and Telnet disable data.
+      paloaltonetworks.panos.panos_type_cmd:
+        provider: '{{ provider }}'
+        cmd: 'get'
+        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+      register: password_settings
+  
+      
+    # - name: Configure password complecity
+    #   paloaltonetworks.panos.panos_config_element:
+    #     provider: '{{ provider }}'
+    #     xpath: "/config/mgt-config/password-complexity"
+    #     element: '<minimum-length>14</minimum-length>'
+    #   register: password_match
+      
+ 
+
+        # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system|
+        # /config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting|/config/mgt-config/password-complexity
+  
+    
+    # - name: Set login banner
+    #   paloaltonetworks.panos.panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+    #     element: '<login-banner>hi firewall</login-banner>'
+    #     # Command in terminal: set deviceconfig system login-banner hi
+    #   register: banner_data
+      
+    # - name: commit Candidate config 
+    #   paloaltonetworks.panos.panos_commit_firewall:
+    #     provider: '{{ provider }}'
+        
+    # - name: Check dns and panorama
+    #   paloaltonetworks.panos.panos_mgtconfig:
+    #     provider: '{{ provider }}'
+    #   register: mgmtconfig
+        
+    # - name: Get the api key
+    #   set_fact:
+    #     apikey: "{{ provider.ip_address | keygen(provider.username, provider.password) }}"
+        
+      
+    # - name: Print the apikey
+    #   debug:
+    #     msg: apikey
+        
+    # - name: pull the networking information
+    #   set_fact:
+    #     interface_data: "{{ provider.ip_address | NetworkInterface(apikey) }}"
+    
+    # - name: Print the apikey
+    #   debug:
+    #     msg: interface_data
+        
+    # - name: Update banner
+    #   set_fact:
+    #     banner_data: "{{ provider.ip_address | UpdateBanner(apikey) }}"
+        
+    # - name: Print Banner
+    #   debug:
+    #     msg: banner_data
+        
+  #   - name: Create Virtual Router
+  #     paloaltonetworks.panos.panos_virtual_router:
+  #       provider: '{{ provider }}'
+  #       state: gathered
+  #     register: vrlist
+
+  #   - name: Print virtual router data
+  #     debug:
+  #       msg: "{{ vrlist }}"
+        
+  #   - name: Parse the output
+  #     set_fact:
+  #      content_json: "{{ vrlist['gathered_xml'] | xml2json }}"
+
+  #   - name: Print the static routes
+  #     debug:
+  #       msg: "{{ content_json }}"
+
+  #   #Remove from here 
+  #   - name: Filter the value for Zones
+  #     set_fact: 
+  #       device_zone_config: "{{ device_data | ftr_zone }}"
+        
+  #   - name: validate the device zones data against standards
+  #     set_fact:
+  #       missing_zone: "{{ standard_interfaces | validate_zone(device_zone_config) }}"
+
+  #   - name: Create Zones as per standards
+  #     paloaltonetworks.panos.panos_zone:
+  #       provider: "{{ provider }}"
+  #       zone: "{{ zone_item.zone_name }}"
+  #       mode: "{{ zone_item.mode }}"
+  #     loop: "{{ missing_zone }}"
+  #     loop_control:
+  #       loop_var: zone_item
+
+  # #Remove till here 
+  
+  #   - name: Retrieve all address group object
+  #     paloaltonetworks.panos.panos_object_facts:
+  #       provider: '{{ provider }}'
+  #       name_regex: '.*.*'
+  #     register: addr_object_result
+
+  #   # - name: Print address group object data
+  #   #   debug:
+  #   #     msg: "{{ addr_object_result }}"
+
+  #   - name: Filter the values for the address objects
+  #     set_fact:
+  #       device_addrobj_config: "{{ addr_object_result | ftr_addrobj }}"
+
+  #   - name: Validate the device address object data against standards
+  #     set_fact:
+  #       missing_addrobj: "{{ standard_address_object | validate_addrobj(device_addrobj_config) }}"
+
+  #   - name: Create Address objects
+  #     paloaltonetworks.panos.panos_address_object:
+  #       provider: '{{ provider }}'
+  #       name: '{{ address_item.name }}'
+  #       value: '{{ address_item.value }}'
+  #     loop: '{{ missing_addrobj }}'
+  #     loop_control:
+  #       loop_var: address_item
+
+  #   - name: Retrieve all service object
+  #     paloaltonetworks.panos.panos_object_facts:
+  #       provider: '{{ provider }}'
+  #       name_regex: '.*.*'
+  #       object_type: 'service'
+  #     register: serv_object_result
+
+  #   # - name: Print service object data
+  #   #   debug:
+  #   #     msg: "{{ serv_object_result }}"
+
+  #   - name: Filter the values for the service objects
+  #     set_fact:
+  #       device_servobj_config: "{{ serv_object_result | ftr_servobj }}"
+
+  #   - name: Validate the device service object data against standards
+  #     set_fact:
+  #       missing_servobj: "{{ standard_service_object | validate_servobj(device_servobj_config) }}"
+    
+  #   - name: Create Service objects
+  #     paloaltonetworks.panos.panos_service_object:
+  #       provider: '{{ provider }}'
+  #       name: '{{ service_item.name }}'
+  #       destination_port: '{{ service_item.destination_port }}'
+  #     loop: '{{ missing_servobj }}'
+  #     loop_control:
+  #       loop_var: service_item
+  
+  #   # - name: Create Routes
+  #   #   paloaltonetworks.panos.panos_static_route:
+  #   #     provider: '{{ provider }}'
+  #   #     name: '{{ route_item.name }}'
+  #   #     destination: '{{ route_item.destination }}'
+  #   #     nexthop: '{{ route_item.nexthop }}'
+  #   #     interface: '{{ route_item.interface }}'
+  #   #   loop: '{{ missing_routes }}'
+  #   #   loop_control:
+  #   #     loop_var: route_item
