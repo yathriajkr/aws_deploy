@@ -1,5 +1,5 @@
 ---
-- name: Check for complaince and configure Standard configs
+- name: Configuration to block urls
   hosts: pa-fw
   connection: local
   vars_files:
