@@ -23,7 +23,7 @@
     #     gather_subset: ['all']
     #   register: device_data
       
-    - name: Create Custom Url Category 'Internet Access List'
+    - name: Create Custom Url Category for blacklist
       paloaltonetworks.panos.panos_custom_url_category:
         provider: '{{ provider }}'
         name: 'Azure_url'
