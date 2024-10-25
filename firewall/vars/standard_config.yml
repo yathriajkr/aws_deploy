@@ -33,3 +33,19 @@ standard_service_object:
   destination_port: 222
 - name: service-tcp-3036
   destination_port: 3036
+
+panos_security_rule:
+- rule_name: 'URL deny for Azure'
+  source_zone: 
+  - Untrust
+  source_ip: 
+  - any
+  destination_zone: 
+  - Web
+  destination_ip: 
+  - any
+  application: 
+  - windows-azure
+  service: 
+  - service-http
+  action: deny
