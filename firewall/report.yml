@@ -36,6 +36,7 @@
     - name: add SSH inbound rule to Panorama device group
       paloaltonetworks.panos.panos_security_rule:
         provider: '{{ provider }}'
+        gathered_filter: '*'
         state: "gathered"
       register: Security_rules
         
