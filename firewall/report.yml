@@ -1,6 +1,6 @@
 ---
 - name: Configuration to block urls
-  hosts: pa-fw
+  hosts: panos-firewall
   connection: local
   vars_files:
     - standard_config.yml    
