@@ -104,14 +104,14 @@
     #   set_fact:
     #    apikey: "{{ apikey_content['response']['result']['key'] }}"
 
-    # - name: Configure login banner
-    #   vars:
-    #     banner_text: 'Authorized Personnel Only!'
-    #   paloaltonetworks.panos.panos_config_element:
-    #     provider: '{{ provider }}'
-    #     xpath: '/config/devices/entry[@name="localhost.localdomain"]/deviceconfig/system'
-    #     element: '<login-banner>{{ banner_text }}</login-banner>'
-    #   register: banner_data
+    - name: Configure login banner
+      vars:
+        banner_text: 'Authorized Personnel Only!'
+      paloaltonetworks.panos.panos_config_element:
+        provider: '{{ provider }}'
+        xpath: '/config/devices/entry[@name="localhost.localdomain"]/deviceconfig/system'
+        element: '<login-banner>{{ banner_text }}</login-banner>'
+      register: banner_data
 
     # - name: Show the system data.
     #   paloaltonetworks.panos.panos_type_cmd:
