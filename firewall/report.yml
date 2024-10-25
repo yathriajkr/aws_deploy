@@ -32,6 +32,21 @@
           - microsoft.com
           - redhat.com
       register: url_category_list
+
+    - name: Apllying Blacklist URL to Security policies
+      paloaltonetworks.panos.panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: '{{ security_item.rule_name }}'
+        source_zone: '{{ security_item.source_zone }}'
+        source_ip: '{{ security_item.source_ip }}'
+        destination_zone: '{{ security_item.destination_zone }}'
+        destination_ip: '{{ security_item.destination_ip }}'
+        application: '{{ security_item.application }}'
+        service: '{{ security_item.service }}'
+        action: '{{ security_item.action }}'
+        url_filtering: "Internet Access List"
+        log_start: "yes"
+        log_end: "yes"
     # - name: configure foo administrator
     #   paloaltonetworks.panos.panos_administrator:
     #     provider: '{{ provider }}'
