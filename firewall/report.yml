@@ -106,7 +106,7 @@
 
     - name: Configure login banner
       vars:
-        banner_text: 'Authorized Personnel Only!'
+        banner_text: 'Authorized Personnel Only! configured through Ansible Automation'
       paloaltonetworks.panos.panos_config_element:
         provider: '{{ provider }}'
         xpath: '/config/devices/entry[@name="localhost.localdomain"]/deviceconfig/system'
