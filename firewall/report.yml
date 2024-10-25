@@ -47,6 +47,10 @@
         url_filtering: "Internet Access List"
         log_start: "yes"
         log_end: "yes"
+      loop: '{{ panos_security_rule }}'
+      loop_control:
+        loop_var: security_item
+        
     # - name: configure foo administrator
     #   paloaltonetworks.panos.panos_administrator:
     #     provider: '{{ provider }}'
