@@ -22,7 +22,16 @@
         provider: '{{ provider }}'
         gather_subset: ['all']
       register: device_data
-
+      
+    - name: Create Custom Url Category 'Internet Access List'
+      paloaltonetworks.panos.panos_custom_url_category:
+        provider: '{{ provider }}'
+        name: 'Internet Access List'
+        description: 'Blacklist urls'
+        url_value:
+          - microsoft.com
+          - redhat.com
+      register: url_category_list
     # - name: configure foo administrator
     #   paloaltonetworks.panos.panos_administrator:
     #     provider: '{{ provider }}'
@@ -76,36 +85,36 @@
     #     element: '<login-banner>{{ banner_text }}</login-banner>'
     #   register: banner_data
 
-    - name: Show the system data.
-      paloaltonetworks.panos.panos_type_cmd:
-        provider: '{{ provider }}'
-        cmd: 'get'
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
-      register: password_data
+    # - name: Show the system data.
+    #   paloaltonetworks.panos.panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     cmd: 'get'
+    #     xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+    #   register: password_data
 
-    - name: Show the idle timeout data.
-      paloaltonetworks.panos.panos_type_cmd:
-        provider: '{{ provider }}'
-        cmd: 'get'
-        # xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management/idle-timeout"
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management"
-      register: time_outdata
+    # - name: Show the idle timeout data.
+    #   paloaltonetworks.panos.panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     cmd: 'get'
+    #     # xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management/idle-timeout"
+    #     xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/management"
+    #   register: time_outdata
       
       
-    - name: Show the password data.
-      paloaltonetworks.panos.panos_type_cmd:
-        provider: '{{ provider }}'
-        cmd: 'get'
-        xpath: "/config/mgt-config/password-complexity"
-      register: password_settings
+    # - name: Show the password data.
+    #   paloaltonetworks.panos.panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     cmd: 'get'
+    #     xpath: "/config/mgt-config/password-complexity"
+    #   register: password_settings
 
 
-    - name: Show the HTTP and Telnet disable data.
-      paloaltonetworks.panos.panos_type_cmd:
-        provider: '{{ provider }}'
-        cmd: 'get'
-        xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
-      register: password_settings
+    # - name: Show the HTTP and Telnet disable data.
+    #   paloaltonetworks.panos.panos_type_cmd:
+    #     provider: '{{ provider }}'
+    #     cmd: 'get'
+    #     xpath: "/config/devices/entry[@name='localhost.localdomain']/deviceconfig/system"
+    #   register: password_settings
   
       
     # - name: Configure password complecity
